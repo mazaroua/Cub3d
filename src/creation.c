@@ -92,6 +92,20 @@ bool	check_wall(t_cub *cub)
 	return (false);
 }
 
+void	player_newpos(t_cub *cub, int key)
+{
+	if (key == 'u')
+	{
+		cub->p_x = cub->p_x + cos(cub->angle) * 5;
+		cub->p_y = cub->p_y + sin(cub->angle) * 5;
+	}
+	if (key == 'd')
+	{
+		cub->p_x = cub->p_x - cos(cub->angle) * 5;
+		cub->p_y = cub->p_y - sin(cub->angle) * 5;
+	}
+}
+
 void move_player(t_cub *cub, char o)
 {
 	int	xtmp;
@@ -100,16 +114,15 @@ void move_player(t_cub *cub, char o)
 	xtmp = cub->p_x;
 	ytmp = cub->p_y;
 	if (o == 'u')
-		cub->p_y -= 1;
+		player_newpos(cub, 'u');
 	if (o == 'd')
-		cub->p_y += 1;
+		player_newpos(cub, 'd');
 	if (o == 'l')
-		cub->p_x -= 1;
+		cub->p_x -= 5;
 	if (o == 'r')
-		cub->p_x += 1;
+		cub->p_x += 5;
 	if (check_wall(cub))
 	{
-		printf("dkhl \n");
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 	}
