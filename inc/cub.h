@@ -17,7 +17,12 @@
 # define SOUTH	'S'
 # define EAST	'E'
 # define WEST	'W'
-
+# define RIGHT_ROTATION 124
+# define LEFT_ROTATION 123
+# define MOVE_FORWARD 13
+# define MOVE_BACKWARD 1
+# define MOVE_RIGHT 2
+# define MOVE_LEFT 0
 
 typedef struct s_color
 {
@@ -28,8 +33,8 @@ typedef struct s_color
 
 typedef struct s_cub
 {
-	int		p_x;
-	int		p_y;
+	double	p_x;
+	double	p_y;
 	float	pdx;
 	float	pdy;
 	float	pa;
