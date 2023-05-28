@@ -133,10 +133,15 @@ void	player_newpos(t_cub *cub, int key)
 		cub->p_y -= 5 * sin(cub->angle);
 	}
 	if (key == MOVE_LEFT)
-		cub->p_x -= 5;
+	{
+		cub->p_x += 5 * sin(cub->angle);
+		cub->p_y -= 5 * cos(cub->angle);
+	}
 	if (key == MOVE_RIGHT)
-		cub->p_x += 5;
-}
+	{
+		cub->p_x -= 5 * sin(cub->angle);
+		cub->p_y += 5 * cos(cub->angle);
+	}}
 
 void move_player(t_cub *cub, int keycode)
 {
