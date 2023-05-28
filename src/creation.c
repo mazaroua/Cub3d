@@ -36,7 +36,7 @@ void draw_vector(t_cub *cub)
 	DDA(cub);
 }
 
-void put_square(t_cub *cub, int x, int y)
+void put_square(t_cub *cub, int x, int y, int color)
 {
 	int i;
 	int j;
@@ -47,7 +47,9 @@ void put_square(t_cub *cub, int x, int y)
 		i = 0;
 		while (i < 32)
 		{
-			mlx_pixel_put(cub->m_ptr, cub->w_ptr, x + i, y + j, 0xfffffff);
+			mlx_pixel_put(cub->m_ptr, cub->w_ptr, x + i, y + j, color);
+			if (!(i % 32) || !(j % 32))
+				mlx_pixel_put(cub->m_ptr, cub->w_ptr, x + i, y + j, 0x808080);
 			i += 1;
 		}
 		j += 1;
@@ -73,39 +75,13 @@ void draw_mini_map(t_cub *cub)
 			if (x > 0)
 				cofx = x * 32;
 			if (cub->map_2d[y][x] == '1')
-				put_square(cub, cofx, cofy);
+				put_square(cub, cofx, cofy, 0xffffff);
+			if (cub->map_2d[y][x] != '1')
+				put_square(cub, cofx, cofy, 0x000000);
 			x += 1;
 		}
 		y += 1;
 	}
-}
-
-void orient_player(t_cub *cub, int color)
-{
-	/*int	j;
-	int	i;
-	int	tmp;
-
-	i = 0;
-	j = 0;
-	tmp = 0;*/
-	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x, cub->p_y, color);
-	/*
-	while (true)
-	{
-		if (tmp == 32)
-			break ;
-		mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x + i, cub->p_y + j, color);
-		if (cub->p_or == NORTH)
-			j -= 1;
-		if (cub->p_or == WEST)
-			i -= 1;
-		if (cub->p_or == SOUTH)
-			j += 1;
-		if (cub->p_or == EAST)
-			i += 1;
-		tmp += 1;
-	}*/
 }
 
 bool	check_wall(t_cub *cub)
@@ -194,7 +170,7 @@ int ft_move(int keycode, t_cub *cub)
 		exit(0);
 	mlx_clear_window(cub->m_ptr, cub->w_ptr);
 	draw_mini_map(cub);
-	orient_player(cub, 0xff0000);
+	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x, cub->p_y, 0xff0000);
 	draw_vector(cub);
 	return (0);
 }
@@ -205,8 +181,7 @@ void put_player(t_cub *cub)
 	cub->p_y *= 32;
 	cub->p_x += 32 / 2;
 	cub->p_y += 32 / 2;
-	orient_player(cub, 0xff0000);
-	
+	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x, cub->p_y, 0xff0000);
 }
 
 void get_angle(t_cub *cub)
