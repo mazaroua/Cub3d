@@ -17,12 +17,12 @@
 # define SOUTH	'S'
 # define EAST	'E'
 # define WEST	'W'
-# define RIGHT_ROTATION 124
-# define LEFT_ROTATION 123
-# define MOVE_FORWARD 13
-# define MOVE_BACKWARD 1
-# define MOVE_RIGHT 2
-# define MOVE_LEFT 0
+# define RIGHT_ROTATION 65363
+# define LEFT_ROTATION 65361
+# define MOVE_FORWARD 119
+# define MOVE_BACKWARD 115
+# define MOVE_RIGHT 100
+# define MOVE_LEFT 97
 
 typedef struct s_color
 {
@@ -30,6 +30,14 @@ typedef struct s_color
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_cub
 {
@@ -56,9 +64,12 @@ typedef struct s_cub
 	char	*c_color;
 	t_color	*rgb_f;
 	t_color	*rgb_c;
+	t_data	*data;
 	double	next_x;
 	double	next_y;
 	double	angle;
+	double	x_h;
+	double	y_h;
 }	t_cub;
 
 void	*ft_malloc(int size);
@@ -83,5 +94,7 @@ char	first_elements(char *str);
 void	creation(t_cub *cub);
 void	put_player(t_cub *cub);
 int		ft_move(int keycode, t_cub *cub);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    horizontal_intersection(t_cub *cub);
 
 #endif

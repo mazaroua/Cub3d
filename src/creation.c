@@ -1,6 +1,6 @@
 #include "../inc/cub.h"
 
-void DDA(t_cub *cub)
+void DDA(t_cub *cub, double x, double y, double next_x, double next_y)
 {
 	int	i;
 	int	dx;
@@ -11,16 +11,20 @@ void DDA(t_cub *cub)
 	float 	X;
 	float	Y;
 
-	dx = cub->next_x - cub->p_x;
-    dy = cub->next_y - cub->p_y;
-	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	dx = next_x - x;
+    dy = next_y - y;
+	if (abs(dx) > abs(dy))
+		steps = abs(dx);
+	else
+		steps = abs(dy);
 	Xinc = dx / (float)steps;
     Yinc = dy / (float)steps;
-	X = cub->p_x;
-    Y = cub->p_y;
+	X = x;
+    Y = y;
     while (steps >= 0)
 	{
-        mlx_pixel_put(cub->m_ptr, cub->w_ptr, round(X), round(Y), 0xff0000);
+        my_mlx_pixel_put(cub->data, round(X), round(Y), 0xff0000);
+		//mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
         X += Xinc;
         Y += Yinc;
 		steps--;
@@ -31,9 +35,7 @@ void draw_vector(t_cub *cub)
 {
 	cub->next_x = cub->p_x + cos(cub->angle) * 100;
 	cub->next_y = cub->p_y + sin(cub->angle) * 100;
-
-	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->next_x, cub->next_y, 0xff0000);
-	DDA(cub);
+	
 }
 
 void put_square(t_cub *cub, int x, int y, int color)
@@ -47,9 +49,9 @@ void put_square(t_cub *cub, int x, int y, int color)
 		i = 0;
 		while (i < 32)
 		{
-			mlx_pixel_put(cub->m_ptr, cub->w_ptr, x + i, y + j, color);
+			my_mlx_pixel_put(cub->data,  x + i, y + j, color);
 			if (!(i % 32) || !(j % 32))
-				mlx_pixel_put(cub->m_ptr, cub->w_ptr, x + i, y + j, 0x808080);
+				my_mlx_pixel_put(cub->data, x + i, y + j, 0x808080);
 			i += 1;
 		}
 		j += 1;
@@ -76,7 +78,7 @@ void draw_mini_map(t_cub *cub)
 				cofx = x * 32;
 			if (cub->map_2d[y][x] == '1')
 				put_square(cub, cofx, cofy, 0xffffff);
-			if (cub->map_2d[y][x] != '1')
+			else
 				put_square(cub, cofx, cofy, 0x000000);
 			x += 1;
 		}
@@ -117,7 +119,8 @@ void	player_newpos(t_cub *cub, int key)
 	{
 		cub->p_x -= 5 * sin(cub->angle);
 		cub->p_y += 5 * cos(cub->angle);
-	}}
+	}
+}
 
 void move_player(t_cub *cub, int keycode)
 {
@@ -133,8 +136,10 @@ void move_player(t_cub *cub, int keycode)
 		cub->p_y = ytmp;
 	}
 	else
-		mlx_pixel_put(cub->m_ptr, cub->w_ptr, xtmp, ytmp, 0x00000);
+		my_mlx_pixel_put(cub->data, xtmp, ytmp, 0x00000);
 }
+
+
 
 void	increment_angle(t_cub *cub, int keycode)
 {
@@ -142,13 +147,18 @@ void	increment_angle(t_cub *cub, int keycode)
 	{
 		if (cub->angle >= 360 * (M_PI / 180))
 			cub->angle = 0;
-		cub->angle += 0.0872665;
+		cub->angle = cub->angle * (180 / M_PI);
+		cub->angle += 5;
+		cub->angle = cub->angle * (M_PI / 180);
+		printf("%f\n", cub->angle * (180 / M_PI));
 	}
 	if (keycode == LEFT_ROTATION)
 	{
 		if (cub->angle <= 0)
 			cub->angle = 360 * (M_PI / 180);
-		cub->angle -= 0.0872665;
+		cub->angle = cub->angle * (180 / M_PI);
+		cub->angle -= 5;
+		cub->angle = cub->angle * (M_PI / 180);
 	}
 }
 
@@ -166,11 +176,14 @@ int ft_move(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
-	if (keycode == 53)
+	if (keycode == 65307)
 		exit(0);
 	mlx_clear_window(cub->m_ptr, cub->w_ptr);
 	draw_mini_map(cub);
-	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x, cub->p_y, 0xff0000);
+	horizontal_intersection(cub);
+	DDA(cub, cub->p_x, cub->p_y, cub->x_h, cub->y_h);
+	my_mlx_pixel_put(cub->data, cub->p_x, cub->p_y, 0xff0000);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	draw_vector(cub);
 	return (0);
 }
@@ -181,7 +194,7 @@ void put_player(t_cub *cub)
 	cub->p_y *= 32;
 	cub->p_x += 32 / 2;
 	cub->p_y += 32 / 2;
-	mlx_pixel_put(cub->m_ptr, cub->w_ptr, cub->p_x, cub->p_y, 0xff0000);
+	my_mlx_pixel_put(cub->data, cub->p_x, cub->p_y, 0xff0000);
 }
 
 void get_angle(t_cub *cub)
@@ -201,7 +214,8 @@ void	drawing(t_cub *cub)
 	get_angle(cub);
 	draw_mini_map(cub);
 	put_player(cub);
-	draw_vector(cub);
+	horizontal_intersection(cub);
+	DDA(cub, cub->p_x, cub->p_y, cub->x_h, cub->y_h);
 	mlx_hook(cub->w_ptr, 02, (1L << 0), ft_move, cub);
 }
 
@@ -210,6 +224,7 @@ void creation(t_cub *cub)
 	cub->y_map = 0;
 	cub->x_map = 0;
 	int tmp = 0;
+	cub->data = ft_malloc(sizeof(t_data));
 	while (cub->map_2d[cub->y_map])
 	{
 		cub->x_map = 0;
@@ -222,6 +237,10 @@ void creation(t_cub *cub)
 	cub->x_map = tmp;
 	cub->m_ptr = mlx_init();
 	cub->w_ptr = mlx_new_window(cub->m_ptr, cub->x_map * 32, cub->y_map * 40, "cub3d");
+	cub->data->img = mlx_new_image(cub->m_ptr, 1600, 900);
+	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
+	, &cub->data->line_length, &cub->data->endian);
 	drawing(cub);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_loop(cub->m_ptr);
 }
