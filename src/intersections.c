@@ -9,7 +9,6 @@ int is_wall(t_cub *cub, double x, double y)
     Y = floor(y / 32) - 1;
     if (cub->map_2d[Y][X] == '1')
     {
-        printf("%d - %d\n", X, Y);
         return (1);
     }
     return (0);
@@ -41,10 +40,15 @@ void    first_horizontal_intersection(t_cub *cub)
 void    next_horizontal_intersection(t_cub *cub)
 {
     if (player_up(cub))
+    {
         cub->y_h -= 32;
+        cub->x_h += (-32 / tan(cub->angle));
+    }
     else
+    {
         cub->y_h += 32;
-    cub->x_h += (32 / tan(cub->angle));
+        cub->x_h += (32 / tan(cub->angle));
+    }
 }
 
 void    horizontal_intersection(t_cub *cub)
