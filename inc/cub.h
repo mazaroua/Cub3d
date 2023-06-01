@@ -70,6 +70,8 @@ typedef struct s_cub
 	double	angle;
 	double	x_h;
 	double	y_h;
+	double	x_v;
+	double	y_v;
 }	t_cub;
 
 void	*ft_malloc(int size);
