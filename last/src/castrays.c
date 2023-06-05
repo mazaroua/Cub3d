@@ -28,11 +28,10 @@ void DDA(t_cub *cub)//should complete this
 
 double	set_angle(double angle)
 {
-	printf("set  angle = %f\n", angle * 180 / M_PI);
-	if (angle < 0)
-		angle = 2 * M_PI + angle;
 	if (angle > 2 * M_PI)
-		 angle = 0;
+		angle -= (2 * M_PI);
+	if (angle < 0)
+		 angle += (2 * M_PI);
 	return (angle);
 }
 
@@ -41,13 +40,16 @@ void	cast_all_rays(t_cub *cub)
 	int		i;
 	double	rayangle;
 
-	rayangle = fabs(cub->angle - (FOV_AGL / 2));
+	rayangle = cub->angle - (FOV_AGL / 2);
+	rayangle = set_angle(rayangle);
 	i = 0;
 	while (i < cub->num_rays)
 	{
 		intersections(rayangle, cub);
-		DDA(cub);
+		convert_to_3d(cub);
+		// DDA(cub);
 	 	rayangle += FOV_AGL / (double)cub->num_rays;
+		rayangle = set_angle(rayangle);
      	i += 1;
     }
 }
