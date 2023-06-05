@@ -84,8 +84,6 @@ int ft_move(int keycode, t_cub *cub)
 	if (keycode == ESC)
 		exit(0);
 	draw_mini_map(cub);
-	// intersections(cub);
-	// DDA(cub, cub->p_x, cub->p_y, cub->next_x, cub->next_y);
 	cast_all_rays(cub);
 	my_mlx_pixel_put(cub, cub->p_x, cub->p_y, 0xff0000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);

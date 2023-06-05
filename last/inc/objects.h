@@ -2,8 +2,7 @@
 # define OBJECTS_H
 
 # define S_SIZE 32
-# define PI	 	3.1415926535
-# define FOV_AGL  (60 * (PI / 180))
+# define FOV_AGL  (60 * (M_PI / 180))
 # define MEM_ERR "memory allocation error\n"
 # define NORTH	'N'
 # define SOUTH	'S'
@@ -49,13 +48,13 @@ typedef struct	s_data
 
 typedef struct	s_ray
 {
-	int		dx;
-	int 	dy;
+	double	dx;
+	double	dy;
 	int		steps;
-	float	Xinc;
-	float	Yinc;
-	float 	X;
-	float	Y;
+	double	Xinc;
+	double	Yinc;
+	double	X;
+	double	Y;
 }	t_ray;
 
 typedef struct s_cub
@@ -93,8 +92,6 @@ typedef struct s_cub
 	double	x_v;
 	double	y_v;
 	double	angle;
-	int		if_horizontal;
-	int		if_vertical;
 }	t_cub;
 
 #endif
