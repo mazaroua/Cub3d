@@ -83,9 +83,9 @@ int ft_move(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
 		exit(0);
-	draw_mini_map(cub);
+	put_surfaces(cub);
 	cast_all_rays(cub);
-	my_mlx_pixel_put(cub, cub->p_x, cub->p_y, 0xff0000);
+	draw_mini_map(cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }

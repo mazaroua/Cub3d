@@ -15,6 +15,7 @@
 # define MOVE_RIGHT 2
 # define MOVE_LEFT 0
 # define ESC 53
+# define M_SIZE 7
 //z  122
 //q  113
 //s  115

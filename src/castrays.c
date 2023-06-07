@@ -46,10 +46,9 @@ void	cast_all_rays(t_cub *cub)
 	while (i < cub->num_rays)
 	{
 		intersections(rayangle, cub);
-		convert_to_3d(cub);
-		// DDA(cub);
 	 	rayangle += FOV_AGL / (double)cub->num_rays;
 		rayangle = set_angle(rayangle);
+		render_walls(cub, i);
      	i += 1;
     }
 }

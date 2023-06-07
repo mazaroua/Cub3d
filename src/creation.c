@@ -18,13 +18,13 @@ void put_square(t_cub *cub, int x, int y, int color)
 	int j;
 
 	j = 0;
-	while (j < 32)
+	while (j < M_SIZE)
 	{
 		i = 0;
-		while (i < 32)
+		while (i < 7)
 		{
 			my_mlx_pixel_put(cub,  x + i, y + j, color);
-			if (!(i % 32) || !(j % 32))
+			if (!(i % M_SIZE) || !(j % M_SIZE))
 				my_mlx_pixel_put(cub, x + i, y + j, 0x808080);
 			i += 1;
 		}
@@ -43,13 +43,13 @@ void draw_mini_map(t_cub *cub)
 	while (cub->map_2d[y])
 	{
 		x = 0;
-		cofy = y * 32;
+		cofy = y * M_SIZE;
 		cofx = 0;
 		x = 0;
 		while (cub->map_2d[y][x])
 		{
 			if (x > 0)
-				cofx = x * 32;
+				cofx = x * M_SIZE;
 			if (cub->map_2d[y][x] == '1')
 				put_square(cub, cofx, cofy, 0xffffff);
 			else
@@ -67,8 +67,6 @@ void put_player(t_cub *cub)
 	cub->p_x += S_SIZE / 2;
 	cub->p_y += S_SIZE / 2;
 	cast_all_rays(cub);
-	DDA(cub);
-	my_mlx_pixel_put(cub, cub->p_x, cub->p_y, 0xff0000);
 }
 
 void creation(t_cub *cub)
@@ -78,7 +76,7 @@ void creation(t_cub *cub)
 	cub->data->img = mlx_new_image(cub->m_ptr, 1600, 900);
 	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
 	, &cub->data->line_length, &cub->data->endian);
-	draw_mini_map(cub);
+	put_surfaces(cub);
 	put_player(cub);
 	mlx_hook(cub->w_ptr, 02, (1L << 0), ft_move, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
