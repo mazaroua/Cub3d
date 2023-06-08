@@ -4,17 +4,18 @@
 # define S_SIZE 32
 # define FOV_AGL  (60 * (M_PI / 180))
 # define MEM_ERR "memory allocation error\n"
+# define IMG_ERR "Invalid file path\n"
 # define NORTH	'N'
 # define SOUTH	'S'
 # define EAST	'E'
 # define WEST	'W'
-# define RIGHT_ROTATION 124
-# define LEFT_ROTATION 123
-# define MOVE_FORWARD 13
-# define MOVE_BACKWARD 1
-# define MOVE_RIGHT 2
-# define MOVE_LEFT 0
-# define ESC 53
+# define RIGHT_ROTATION 100
+# define LEFT_ROTATION 113
+# define MOVE_FORWARD 122
+# define MOVE_BACKWARD 115
+# define MOVE_RIGHT 65363
+# define MOVE_LEFT 65361
+# define ESC 65307
 # define M_SIZE 7
 //z  122
 //q  113
@@ -38,6 +39,17 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct	s_ray
+{
+	int		dx;
+	int 	dy;
+	int		steps;
+	float	Xinc;
+	float	Yinc;
+	float 	X;
+	float	Y;
+}	t_ray;
+
 typedef struct	s_data
 {
 	void	*img;
@@ -47,16 +59,19 @@ typedef struct	s_data
 	int		endian;
 }   t_data;
 
-typedef struct	s_ray
+typedef struct	s_tx
 {
-	double	dx;
-	double	dy;
-	int		steps;
-	double	Xinc;
-	double	Yinc;
-	double	X;
-	double	Y;
-}	t_ray;
+	void		*ptr;
+	u_int32_t	*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
+	char		*type;
+	int			sprite_x;
+	int			sprite_yY;
+}	t_tx;
 
 typedef struct s_cub
 {
@@ -93,6 +108,10 @@ typedef struct s_cub
 	double	x_v;
 	double	y_v;
 	double	angle;
+	t_tx	*north_txt;
+	t_tx	*south_txt;
+	t_tx	*west_txt;
+	t_tx	*east_txt;
 }	t_cub;
 
 #endif

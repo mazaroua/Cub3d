@@ -18,15 +18,20 @@ void	put_rect(int x, t_cub *cub, double plan_height)
 	}
 }
 
-void	render_walls(t_cub *cub, int i)
+void	render_walls(double rayangle, t_cub *cub, int i)
 {
 	double	plan_dist;
 	double	raydistance;
 	double	proj_plan_h;
-	int		j;
+	double	newang;
 
-	raydistance = cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y);
-	plan_dist = (cub->win_width / 2) /  tan(FOV_AGL / 2);
+	newang = cub->angle - rayangle;
+	newang = set_angle(newang);
+	raydistance = cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y)\
+	* cos(newang);
+	if (round(raydistance) == 0)
+		raydistance = 1;
+	plan_dist = (cub->win_width / 2) / tan(FOV_AGL / 2);
 	proj_plan_h = (S_SIZE  / raydistance) * plan_dist;
 	put_rect(i, cub, proj_plan_h);
 }

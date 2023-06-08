@@ -42,7 +42,9 @@ bool	check_wall(t_cub *cub);
 void    intersections(double rayangle, t_cub *cub);
 void	cast_all_rays(t_cub *cub);
 void    DDA(t_cub *cub);
-void	render_walls(t_cub *cub, int i);
+void	render_walls(double rayangle, t_cub *cub, int i);
 double  cal_distance(double x1, double y1, double x2, double y2);
 void	put_surfaces(t_cub *cub);
+double	set_angle(double angle);
+t_tx   *new_texture(t_cub *cub, char *file);
 #endif
