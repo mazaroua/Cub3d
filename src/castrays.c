@@ -43,7 +43,6 @@ void	cast_all_rays(t_cub *cub)
 	rayangle = cub->angle - (FOV_AGL / 2);
 	rayangle = set_angle(rayangle);
 	i = 0;
-	load_textures(cub);
 	while (i < cub->num_rays)
 	{
 		intersections(rayangle, cub);

@@ -137,18 +137,22 @@ void    intersections(double rayangle, t_cub *cub)
 	double dis_h;
 	double dis_v;
 
+    cub->vert_line = false;
+    cub->hori_line = false;
 	horizontal_intersection(rayangle, cub);
  	vertical_intersection(rayangle, cub);
 	dis_h = cal_distance(cub->p_x, cub->p_y, cub->x_h, cub->y_h);
 	dis_v = cal_distance(cub->p_x, cub->p_y, cub->x_v, cub->y_v);
     if (dis_h > dis_v)
     {
+        cub->vert_line = true;
         cub->next_x = cub->x_v;
         cub->next_y = cub->y_v;
         cub->x_offset = (int)cub->y_v % 32;
    	}
 	else
 	{
+        cub->hori_line = true;
  		cub->next_x = cub->x_h;
  		cub->next_y = cub->y_h;
         cub->x_offset = (int)cub->x_h % 32;

@@ -66,6 +66,7 @@ void put_player(t_cub *cub)
 	cub->p_y *= S_SIZE;
 	cub->p_x += S_SIZE / 2;
 	cub->p_y += S_SIZE / 2;
+	set_textures(cub);
 	cast_all_rays(cub);
 }
 
