@@ -47,4 +47,6 @@ double  cal_distance(double x1, double y1, double x2, double y2);
 void	put_surfaces(t_cub *cub);
 double	set_angle(double angle);
 t_tx   *new_texture(t_cub *cub, char *file);
+void    load_textures(t_cub *data);
+
 #endif

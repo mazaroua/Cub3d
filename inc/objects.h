@@ -9,13 +9,13 @@
 # define SOUTH	'S'
 # define EAST	'E'
 # define WEST	'W'
-# define RIGHT_ROTATION 100
-# define LEFT_ROTATION 113
-# define MOVE_FORWARD 122
-# define MOVE_BACKWARD 115
-# define MOVE_RIGHT 65363
-# define MOVE_LEFT 65361
-# define ESC 65307
+# define RIGHT_ROTATION 124
+# define LEFT_ROTATION 123
+# define MOVE_FORWARD 13
+# define MOVE_BACKWARD 1
+# define MOVE_RIGHT 2
+# define MOVE_LEFT 0
+# define ESC 53
 # define M_SIZE 7
 //z  122
 //q  113
@@ -112,6 +112,14 @@ typedef struct s_cub
 	t_tx	*south_txt;
 	t_tx	*west_txt;
 	t_tx	*east_txt;
+	void	*texture;
+	int		texture_width;
+	int		texture_height;
+	unsigned int	*texture_addr;
+	int		texture_bpp;
+	int		texture_sline;
+	int		texture_endian;
+	double	x_offset;
 }	t_cub;
 
 #endif

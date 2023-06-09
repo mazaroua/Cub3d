@@ -1,9 +1,23 @@
 #include "../inc/cub.h"
 
+
+unsigned int	get_color_in_texture(t_cub *cub, int Y, double wall_height)
+{
+	int				x;
+	int				y;
+	unsigned int	color;
+	y = Y + (wall_height / 2) - (cub->win_height / 2);
+	x = (cub->x_offset / 32) * cub->texture_width;
+	y = y * (cub->texture_height / wall_height);
+	color = cub->texture_addr[abs((y * cub->texture_height) + x)];
+	return (color);
+}
+
 void	put_rect(int x, t_cub *cub, double plan_height)
 {
-	int	top_pixel;
-	int bottom_pixel;
+	int				top_pixel;
+	int 			bottom_pixel;
+	unsigned int	color;
 
 	top_pixel = (cub->win_height / 2) - ((int)plan_height / 2);
 	if (top_pixel < 0)
@@ -13,7 +27,8 @@ void	put_rect(int x, t_cub *cub, double plan_height)
 		bottom_pixel = cub->win_height;
 	while (top_pixel < bottom_pixel)
 	{
-		my_mlx_pixel_put(cub, x , top_pixel, 0xffffff);
+		color = get_color_in_texture(cub, top_pixel, plan_height);
+		my_mlx_pixel_put(cub, x , top_pixel, color);
 		top_pixel++;
 	}
 }

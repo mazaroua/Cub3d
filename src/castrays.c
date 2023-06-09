@@ -8,10 +8,10 @@ void DDA(t_cub *cub)//should complete this
 
 	ray.dx = cub->next_x - cub->p_x;
     ray.dy = cub->next_y - cub->p_y;
-	if (fabs(ray.dx) > fabs(ray.dy))
-		ray.steps = fabs(ray.dx);
+	if (abs(ray.dx) > abs(ray.dy))
+		ray.steps = abs(ray.dx);
 	else
-		ray.steps = fabs(ray.dy);
+		ray.steps = abs(ray.dy);
 	ray.Xinc = ray.dx / ray.steps;
     ray.Yinc = ray.dy / ray.steps;
 	ray.X = cub->p_x;
@@ -43,6 +43,7 @@ void	cast_all_rays(t_cub *cub)
 	rayangle = cub->angle - (FOV_AGL / 2);
 	rayangle = set_angle(rayangle);
 	i = 0;
+	load_textures(cub);
 	while (i < cub->num_rays)
 	{
 		intersections(rayangle, cub);
