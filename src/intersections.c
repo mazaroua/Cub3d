@@ -18,8 +18,8 @@ int is_wall(t_cub *cub, double x, double y)
 
     X = (int)floor(x / S_SIZE);
     Y = (int)floor(y / S_SIZE);
-	if (X < 0 || X > (cub->win_width / 32) - 1
-		|| Y < 0 || Y > (cub->win_height / 32) - 1)
+	if (X < 0 || X > (cub->win_width / S_SIZE) - 1
+		|| Y < 0 || Y > (cub->win_height / S_SIZE) - 1)
 		return (-1);
     if (cub->map_2d[Y][X] == '1')
         return (1);
@@ -36,13 +36,9 @@ int player_up(double angle)
 void    first_horizontal_intersection(double rayangle, t_cub *cub)
 {
 	if (player_up(rayangle))
-    {
-        cub->y_h = floor(cub->p_y / 32) * 32;
-    }
+        cub->y_h = floor(cub->p_y / S_SIZE) * S_SIZE;
     else
-    {
-        cub->y_h = floor(cub->p_y / 32) * 32 + 32;
-    }
+        cub->y_h = floor(cub->p_y / S_SIZE) * S_SIZE + S_SIZE;
     cub->x_h = (cub->y_h - cub->p_y) / tan(rayangle) + cub->p_x;
 }
 
@@ -83,9 +79,9 @@ void	first_ver_intersect(double rayangle, t_cub *cub)
 	double	xdiff;
 
     if (right_side(rayangle))
-	    cub->x_v = (floor(cub->p_x / 32) + 1 ) * 32;
+	    cub->x_v = (floor(cub->p_x / S_SIZE) + 1 ) * S_SIZE;
     else
-    	cub->x_v = floor(cub->p_x / 32) * 32;
+    	cub->x_v = floor(cub->p_x / S_SIZE) * S_SIZE;
 	xdiff = cub->x_v - cub->p_x;
 	Y1 = xdiff * tan(rayangle);
 	cub->y_v = cub->p_y + Y1;
@@ -148,13 +144,13 @@ void    intersections(double rayangle, t_cub *cub)
         cub->vert_line = true;
         cub->next_x = cub->x_v;
         cub->next_y = cub->y_v;
-        cub->x_offset = (int)cub->y_v % 32;
+        cub->x_offset = (int)cub->y_v % S_SIZE;
    	}
 	else
 	{
         cub->hori_line = true;
  		cub->next_x = cub->x_h;
  		cub->next_y = cub->y_h;
-        cub->x_offset = (int)cub->x_h % 32;
+        cub->x_offset = (int)cub->x_h % S_SIZE;
 	}
 }

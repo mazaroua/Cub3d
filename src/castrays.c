@@ -2,20 +2,20 @@
 #include "../inc/cub.h"
 
 
-void DDA(t_cub *cub)//should complete this
+void DDA(t_cub *cub)
 {	
 	t_ray	ray;
 
-	ray.dx = cub->next_x - cub->p_x;
-    ray.dy = cub->next_y - cub->p_y;
+	ray.dx = (cub->next_x * SCALE_SIZE) - cub->p_minix;
+    ray.dy = (cub->next_y * SCALE_SIZE) - cub->p_miniy;
 	if (abs(ray.dx) > abs(ray.dy))
 		ray.steps = abs(ray.dx);
 	else
 		ray.steps = abs(ray.dy);
 	ray.Xinc = ray.dx / ray.steps;
     ray.Yinc = ray.dy / ray.steps;
-	ray.X = cub->p_x;
-    ray.Y = cub->p_y;
+	ray.X = cub->p_minix;
+    ray.Y = cub->p_miniy;
     while (ray.steps >= 0)
 	{
         my_mlx_pixel_put(cub, round(ray.X)\

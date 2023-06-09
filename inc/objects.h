@@ -16,7 +16,7 @@
 # define MOVE_RIGHT 100
 # define MOVE_LEFT 113
 # define ESC 65307
-# define M_SIZE 7
+# define SCALE_SIZE 0.3
 //z  122
 //q  113
 //s  115
@@ -114,13 +114,8 @@ typedef struct s_cub
 	t_tx	*east_txt;
 	bool	hori_line;
 	bool	vert_line;
-//	void	*texture;
-//	int		texture_width;
-//	int		texture_height;
-//	unsigned int	*texture_addr;
-//	int		texture_bpp;
-//	int		texture_sline;
-//	int		texture_endian;
+	double	p_minix;
+	double	p_miniy;
 	double	x_offset;
 }	t_cub;
 

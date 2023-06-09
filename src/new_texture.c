@@ -11,7 +11,7 @@ t_tx   *new_texture(t_cub *cub, char *file)
 		write(2, IMG_ERR, 18);
 		exit (1);
 	}
-	tx->data = (unsigned int*)mlx_get_data_addr(tx->ptr, &tx->bpp \
+	tx->data = (unsigned int *)mlx_get_data_addr(tx->ptr, &tx->bpp \
 	,&tx->size_line, &tx->endian);
 	if (!tx->data)
 		return (0);

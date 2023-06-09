@@ -18,14 +18,12 @@ void put_square(t_cub *cub, int x, int y, int color)
 	int j;
 
 	j = 0;
-	while (j < M_SIZE)
+	while (j < S_SIZE * SCALE_SIZE)
 	{
 		i = 0;
-		while (i < 7)
+		while (i < S_SIZE * SCALE_SIZE)
 		{
 			my_mlx_pixel_put(cub,  x + i, y + j, color);
-			if (!(i % M_SIZE) || !(j % M_SIZE))
-				my_mlx_pixel_put(cub, x + i, y + j, 0x808080);
 			i += 1;
 		}
 		j += 1;
@@ -43,13 +41,13 @@ void draw_mini_map(t_cub *cub)
 	while (cub->map_2d[y])
 	{
 		x = 0;
-		cofy = y * M_SIZE;
+		cofy = (y * S_SIZE) * SCALE_SIZE;
 		cofx = 0;
 		x = 0;
 		while (cub->map_2d[y][x])
 		{
 			if (x > 0)
-				cofx = x * M_SIZE;
+				cofx = (x * S_SIZE) * SCALE_SIZE;
 			if (cub->map_2d[y][x] == '1')
 				put_square(cub, cofx, cofy, 0xffffff);
 			else
@@ -62,11 +60,15 @@ void draw_mini_map(t_cub *cub)
 
 void put_player(t_cub *cub)
 {
-	cub->p_x *= S_SIZE;
+	cub->p_x *= S_SIZE ;
 	cub->p_y *= S_SIZE;
 	cub->p_x += S_SIZE / 2;
 	cub->p_y += S_SIZE / 2;
+	cub->p_minix = cub->p_x * SCALE_SIZE;
+	cub->p_miniy = cub->p_y * SCALE_SIZE;
+	put_square(cub, cub->p_minix, cub->p_miniy, 0xff0000);
 	set_textures(cub);
+	draw_mini_map(cub);
 	cast_all_rays(cub);
 }
 

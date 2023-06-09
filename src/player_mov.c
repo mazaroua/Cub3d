@@ -6,21 +6,29 @@ void	player_newpos(t_cub *cub, int key)
 	{
 		cub->p_x += 5 * cos(cub->angle);
 		cub->p_y += 5 * sin(cub->angle);
+		cub->p_minix = cub->p_x * SCALE_SIZE;
+		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_BACKWARD)
 	{
 		cub->p_x -= 5 * cos(cub->angle);
 		cub->p_y -= 5 * sin(cub->angle);
+		cub->p_minix = cub->p_x * SCALE_SIZE;
+		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_LEFT)
 	{
 		cub->p_x += 5 * sin(cub->angle);
 		cub->p_y -= 5 * cos(cub->angle);
+		cub->p_minix = cub->p_x * SCALE_SIZE;
+		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_RIGHT)
 	{
 		cub->p_x -= 5 * sin(cub->angle);
 		cub->p_y += 5 * cos(cub->angle);
+		cub->p_minix = cub->p_x * SCALE_SIZE;
+		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 }
 
@@ -82,10 +90,11 @@ int ft_move(int keycode, t_cub *cub)
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
-		exit(0);
+		exit (0);
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
+	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff0000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }

@@ -49,4 +49,6 @@ double	set_angle(double angle);
 t_tx   *new_texture(t_cub *cub, char *file);
 //void    load_textures(t_cub *data);
 void	set_textures(t_cub *cub);
+void	player_minimap(t_cub *cub, int x, int y);
+void    put_square(t_cub *cub, int x, int y, int color);
 #endif
