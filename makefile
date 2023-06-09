@@ -1,15 +1,18 @@
 NAME=cub3d
 CFLAGS= #-Wextra -Wall -Werror
-LINK= -lmlx -framework OpenGL -framework AppKit -lm
+#LINK= -lmlx -framework OpenGL -framework AppKit -lm
+LINK = -lmlx -lXext -lX11 -lm
 INC= inc/cub.h
 
-SRS= src/check_map.c        src/ft_split.c         src/textures_colors.c \
-	src/free_elements.c    src/ft_split2.c        src/textures_colors2.c \
-	src/ft_itoa.c          src/main.c             src/tools.c  src/creation.c \
-	src/get_next_line_utils.c src/get_next_line.c
+SRS= src/castrays.c       src/ft_split.c             src/player_mov.c \
+	src/check_map.c      src/get_next_line.c        src/surfaces.c \
+	src/convert.c        src/get_next_line_utils.c  src/textures_colors2.c \
+	src/creation.c       src/init.c                 src/textures_colors.c \
+	src/free_elements.c  src/intersections.c        src/tools.c \
+	src/ft_itoa.c        src/main.c \
+	src/ft_split2.c      src/new_texture.c
 
-OJS= check_map.o ft_itoa.o  ft_split2.o textures_colors.o  tools.o free_elements.o  creation.o \
-	ft_split.o  main.o  textures_colors2.o get_next_line.o get_next_line_utils.o
+OJS= $(SRS:.c=.o)
 
 all: $(NAME)
 
