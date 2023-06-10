@@ -6,13 +6,15 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 
 	if (cub->hori_line == true)
 	{
+		// if (cub->door)
+		// 	tx = cub->door_txt;
 		if (rayangle > M_PI  && rayangle < 2 * M_PI)
 			tx = cub->south_txt;
 		else
 			tx = cub->north_txt;
-		
+
 	}
-	if (cub->vert_line == true)
+	else if (cub->vert_line == true)
 	{
 		if (rayangle > (M_PI / 2) && rayangle < (M_PI * 3) / 2)
 			tx = cub->west_txt;
@@ -28,7 +30,7 @@ unsigned int	get_color_in_texture(t_cub *cub, int Y, double w_height, t_tx *tx)
 	int				y;
 	unsigned int	color;
 
-	y = Y + (w_height / 2) - (cub->win_height / 2);
+	y = Y + (w_height / 2) - (WIN_HEIGTH / 2);
 	x = (cub->x_offset / 32) * tx->width;
 	y = y * (tx->height / w_height);
 	color = tx->data[abs((y * tx->height) + x)];
@@ -42,12 +44,12 @@ void	put_rect(double rayangle, int x, t_cub *cub, double plan_height)
 	unsigned int	color;
 	t_tx			*tx;
 
-	top_pixel = (cub->win_height / 2) - ((int)plan_height / 2);
+	top_pixel = (WIN_HEIGTH / 2) - ((int)plan_height / 2);
 	if (top_pixel < 0)
 		top_pixel = 0;
-	bottom_pixel = (cub->win_height / 2) + ((int)plan_height / 2);
-	if (bottom_pixel > cub->win_height)
-		bottom_pixel = cub->win_height;
+	bottom_pixel = (WIN_HEIGTH / 2) + ((int)plan_height / 2);
+	if (bottom_pixel > WIN_HEIGTH)
+		bottom_pixel = WIN_HEIGTH;
 	tx = depends_side(rayangle, cub);
 	while (top_pixel < bottom_pixel)
 	{
@@ -70,7 +72,7 @@ void	render_walls(double rayangle, t_cub *cub, int i)
 	* cos(newang);
 	if (round(raydistance) == 0)
 		raydistance = 1;
-	plan_dist = (cub->win_width / 2) / tan(FOV_AGL / 2);
+	plan_dist = (WIN_WITH / 2) / tan(FOV_AGL / 2);
 	proj_plan_h = (S_SIZE  / raydistance) * plan_dist;
 	put_rect(rayangle, i, cub, proj_plan_h);
 }

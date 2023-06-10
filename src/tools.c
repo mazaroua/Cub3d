@@ -4,7 +4,7 @@ void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0  || x > c->win_width || y < 0 || y > c->win_height)
+	if (x < 0  || x > WIN_WITH || y < 0 || y > WIN_HEIGTH)
 		return ;
 	dst = c->data->addr + (y * c->data->line_length + x * (c->data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;

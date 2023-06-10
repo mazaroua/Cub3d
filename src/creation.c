@@ -1,15 +1,19 @@
 #include "../inc/cub.h"
 
-bool	check_wall(t_cub *cub)
+int	check_wall(t_cub *cub, int x, int y)
 {
 	int	fpx;
 	int	fpy;
 
-	fpx = (int)floor(cub->p_x) / 32;
-	fpy = (int)floor(cub->p_y) / 32;
+	fpx = (int)floor(x) / 32;
+	fpy = (int)floor(y) / 32;
+	if (fpx < 0 || fpx > cub->win_width || fpy < 0 || fpy > cub->win_height)
+		return (1);
 	if (cub->map_2d[fpy][fpx] == '1')
-		return (true);
-	return (false);
+		return (1);
+	if (cub->map_2d[fpy][fpx] == 'D')
+		return (2);
+	return (0);
 }
 
 void put_square(t_cub *cub, int x, int y, int color)
@@ -49,9 +53,11 @@ void draw_mini_map(t_cub *cub)
 			if (x > 0)
 				cofx = (x * S_SIZE) * SCALE_SIZE;
 			if (cub->map_2d[y][x] == '1')
-				put_square(cub, cofx, cofy, 0xffffff);
+				put_square(cub, cofx, cofy, 0x00ffff);
+			else if (cub->map_2d[y][x] == 'D')
+				put_square(cub, cofx, cofy, 0x964B00);
 			else
-				put_square(cub, cofx, cofy, 0x000000);
+				put_square(cub, cofx, cofy, 0x808080);
 			x += 1;
 		}
 		y += 1;
@@ -75,8 +81,8 @@ void put_player(t_cub *cub)
 void creation(t_cub *cub)
 {
 	init_values(cub);
-	cub->w_ptr = mlx_new_window(cub->m_ptr, cub->win_width, cub->win_height, "cub3d");
-	cub->data->img = mlx_new_image(cub->m_ptr, 1600, 900);
+	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WITH, WIN_HEIGTH, "cub3d");
+	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WITH, WIN_HEIGTH);
 	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
 	, &cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);

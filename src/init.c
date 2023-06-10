@@ -32,7 +32,6 @@ void    init_values(t_cub *cub)
 	cub->x_map = tmp;
     cub->win_width = cub->x_map * S_SIZE;
     cub->win_height = cub->y_map * S_SIZE;
-    cub->num_rays = cub->win_width;
     get_angle(cub);
     cub->m_ptr = mlx_init();
 }

@@ -24,4 +24,5 @@ void	set_textures(t_cub *cub)
 	cub->south_txt = new_texture(cub, cub->s_texture);
 	cub->west_txt = new_texture(cub, cub->w_texture);
 	cub->east_txt = new_texture(cub, cub->e_texture);
+	cub->door_txt = new_texture(cub, "textures/door.xpm");
 }

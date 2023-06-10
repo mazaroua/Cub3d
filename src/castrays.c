@@ -1,13 +1,14 @@
 
 #include "../inc/cub.h"
 
-
 void DDA(t_cub *cub)
 {	
 	t_ray	ray;
 
-	ray.dx = (cub->next_x * SCALE_SIZE) - cub->p_minix;
-    ray.dy = (cub->next_y * SCALE_SIZE) - cub->p_miniy;
+	ray.nxtx = cub->p_x + cos(cub->angle) * 20;
+	ray.nxty = cub->p_y + sin(cub->angle) * 20;
+	ray.dx = (ray.nxtx - cub->p_x) * SCALE_SIZE;
+    ray.dy = (ray.nxty - cub->p_y) * SCALE_SIZE;
 	if (abs(ray.dx) > abs(ray.dy))
 		ray.steps = abs(ray.dx);
 	else
@@ -43,10 +44,10 @@ void	cast_all_rays(t_cub *cub)
 	rayangle = cub->angle - (FOV_AGL / 2);
 	rayangle = set_angle(rayangle);
 	i = 0;
-	while (i < cub->num_rays)
+	while (i < NUM_RAYS)
 	{
 		intersections(rayangle, cub);
-	 	rayangle += FOV_AGL / (double)cub->num_rays;
+	 	rayangle += FOV_AGL / (double)NUM_RAYS;
 		rayangle = set_angle(rayangle);
 		render_walls(rayangle, cub, i);
      	i += 1;

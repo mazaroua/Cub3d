@@ -1,10 +1,10 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-F 220,255,255
+NO textures/texture5.xpm
+SO textures/texture6.xpm
+WE textures/texture2.xpm
+EA textures/texture3.xpm
 
-C 225,30,255
+F 128,128,128
+C 135,206,235
 
 1111111111111111111111111111111
 1000000000000000000000000000001

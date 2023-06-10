@@ -39,14 +39,19 @@ void move_player(t_cub *cub, int keycode)
 
 	xtmp = cub->p_x;
 	ytmp = cub->p_y;
+	cub->door = false;
 	player_newpos(cub, keycode);
-	if (check_wall(cub))
+	if (check_wall(cub, cub->p_x, cub->p_y))
 	{
+		// if (check_wall(cub, cub->p_x, cub->p_y) == 2)
+		// {
+		// 	cub->door_x = cub->p_x;
+		// 	cub->door_y = cub->p_y;
+		// 	cub->door = true;
+		// }
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 	}
-	else
-		my_mlx_pixel_put(cub, xtmp, ytmp, 0x00000);
 }
 
 void	increment_angle(t_cub *cub, int keycode)
@@ -89,12 +94,18 @@ int ft_move(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
+	// if (keycode == OPEN_DOOR)
+	// {
+	// 	if (cub->door)
+	// 		cub->map_2d[cub->door_y][cub->door_x] = '0';
+	// }
 	if (keycode == ESC)
 		exit (0);
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
-	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff0000);
+	if (!check_wall(cub, cub->p_minix, cub->p_miniy))
+		my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }

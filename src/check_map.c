@@ -12,6 +12,8 @@ char	poss_char(char c)
 		return (WEST);
 	if(c == 'E')
 		return (EAST);
+	if (c == 'D')
+		return (DOR);
 	return (0);
 }
 
@@ -30,9 +32,9 @@ void	check_map(char **map, t_cub *cub, int i)
 		{
 			if (poss_char(map[i][j]) == 0)
 				exit_error(cub);
-			if (pos == true && poss_char(map[i][j]) > 1)
+			if (pos == true && poss_char(map[i][j]) != 1 && poss_char(map[i][j]) != 68)
 				exit_error(cub);
-			if (poss_char(map[i][j]) > 1)
+			if (poss_char(map[i][j]) != 1 && poss_char(map[i][j]) != 68)
 			{
 				cub->p_or = poss_char(map[i][j]);
 				cub->p_x = j;

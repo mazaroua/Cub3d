@@ -1,7 +1,10 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define S_SIZE 32
+# define WIN_WITH	1280
+# define WIN_HEIGTH	1024
+# define NUM_RAYS	WIN_WITH
+# define S_SIZE		32
 # define FOV_AGL  (60 * (M_PI / 180))
 # define MEM_ERR "memory allocation error\n"
 # define IMG_ERR "Invalid file path\n"
@@ -9,14 +12,16 @@
 # define SOUTH	'S'
 # define EAST	'E'
 # define WEST	'W'
-# define RIGHT_ROTATION 65363
-# define LEFT_ROTATION 65361
-# define MOVE_FORWARD 122
-# define MOVE_BACKWARD 115
-# define MOVE_RIGHT 100
-# define MOVE_LEFT 113
-# define ESC 65307
+# define DOR	'D'
+# define RIGHT_ROTATION 124
+# define LEFT_ROTATION 123
+# define MOVE_FORWARD 13
+# define MOVE_BACKWARD 1
+# define MOVE_RIGHT 2
+# define MOVE_LEFT 0
+# define ESC 53
 # define SCALE_SIZE 0.3
+# define OPEN_DOOR 49
 //z  122
 //q  113
 //s  115
@@ -43,6 +48,8 @@ typedef struct	s_ray
 {
 	int		dx;
 	int 	dy;
+	double	nxtx;
+	double	nxty;
 	int		steps;
 	float	Xinc;
 	float	Yinc;
@@ -112,10 +119,17 @@ typedef struct s_cub
 	t_tx	*south_txt;
 	t_tx	*west_txt;
 	t_tx	*east_txt;
+	t_tx	*door_txt;
 	bool	hori_line;
 	bool	vert_line;
+	bool	door;
+	bool	close_door;
+	int		door_x;
+	int		door_y;
 	double	p_minix;
 	double	p_miniy;
+	//double	nxt_minix;
+	//double	nxt_miniy;
 	double	x_offset;
 }	t_cub;
 

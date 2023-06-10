@@ -4,9 +4,7 @@ bool    right_side(double rayangle)
 {
     if ((rayangle * (180 / M_PI)) > 270 && (rayangle * (180 / M_PI)) <= 360
 		|| fabs((rayangle * (180 / M_PI))) >= 0 && (rayangle * (180 / M_PI)) < 90)
-	{
         return (true);
-	}
     return (false);
 }
 
@@ -23,6 +21,11 @@ int is_wall(t_cub *cub, double x, double y)
 		return (-1);
     if (cub->map_2d[Y][X] == '1')
         return (1);
+	if (cub->map_2d[Y][X] == 'D')
+	{
+		cub->door = true;
+		return (2);
+	}
     return (0);
 }
 
@@ -58,19 +61,16 @@ void    next_horizontal_intersection(double rayangle, t_cub *cub)
 
 void    horizontal_intersection(double rayangle, t_cub *cub)
 {
-	// if (!(rayangle == M_PI && rayangle == 0))
-     //{
-   		first_horizontal_intersection(rayangle, cub);
-		if (!is_wall(cub, cub->x_h, cub->y_h + 1) && !is_wall(cub, cub->x_h, cub->y_h - 1))
+   	first_horizontal_intersection(rayangle, cub);
+	if (!is_wall(cub, cub->x_h, cub->y_h + 1) && !is_wall(cub, cub->x_h, cub->y_h - 1))
+	{
+		while (true)
 		{
-			while (true)
-			{
-				next_horizontal_intersection(rayangle, cub);
-				if (is_wall(cub, cub->x_h, cub->y_h + 1) || is_wall(cub, cub->x_h, cub->y_h - 1))
-					break ;
-			}
-	 	}
-	 //}
+			next_horizontal_intersection(rayangle, cub);
+			if (is_wall(cub, cub->x_h, cub->y_h + 1) || is_wall(cub, cub->x_h, cub->y_h - 1))
+				break ;
+		}
+ 	}
 }
 
 void	first_ver_intersect(double rayangle, t_cub *cub)
@@ -103,19 +103,16 @@ void	next_ver_intersect(double rayangle, t_cub *cub)
 
 void	vertical_intersection(double rayangle, t_cub *cub)
 {
-//	if (!(rayangle == 3 * (M_PI / 2) && rayangle == M_PI / 2))
-//	 {
-		first_ver_intersect(rayangle, cub);
-		if (!is_wall(cub, cub->x_v + 1, cub->y_v) && !is_wall(cub, cub->x_v - 1, cub->y_v))
+	first_ver_intersect(rayangle, cub);
+	if (!is_wall(cub, cub->x_v + 1, cub->y_v) && !is_wall(cub, cub->x_v - 1, cub->y_v))
+	{
+		 while (true)
 		{
-			while (true)
-			{
-				next_ver_intersect(rayangle, cub);
-				if (is_wall(cub, cub->x_v + 1, cub->y_v) || is_wall(cub, cub->x_v - 1, cub->y_v))
-					break ;
-			}
+			next_ver_intersect(rayangle, cub);
+			if (is_wall(cub, cub->x_v + 1, cub->y_v) || is_wall(cub, cub->x_v - 1, cub->y_v))
+				break ;
 		}
-//	}
+	}
 }
 
 double  cal_distance(double x1, double y1, double x2, double y2)
@@ -135,6 +132,7 @@ void    intersections(double rayangle, t_cub *cub)
 
     cub->vert_line = false;
     cub->hori_line = false;
+	cub->door = false;
 	horizontal_intersection(rayangle, cub);
  	vertical_intersection(rayangle, cub);
 	dis_h = cal_distance(cub->p_x, cub->p_y, cub->x_h, cub->y_h);

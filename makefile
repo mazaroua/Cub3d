@@ -1,7 +1,7 @@
 NAME=cub3d
-CFLAGS= #-Wextra -Wall -Werror
-#LINK= -lmlx -framework OpenGL -framework AppKit -lm
-LINK = -lmlx -lXext -lX11 -lm
+CFLAGS= #-fsanitize=address
+LINK= -lmlx -framework OpenGL -framework AppKit -lm
+#LINK = -lmlx -lXext -lX11 -lm
 INC= inc/cub.h
 
 SRS= src/castrays.c       src/ft_split.c             src/player_mov.c \
@@ -17,7 +17,7 @@ OJS= $(SRS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OJS)
-	cc -o $(NAME) $(OJS) $(LINK)
+	cc $(CFLAGS) -o $(NAME) $(OJS) $(LINK)
 
 %.o:src/%.c $(INC)
 	cc -c $(CFLAGS) $< -o $@
