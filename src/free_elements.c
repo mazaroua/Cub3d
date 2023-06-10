@@ -44,6 +44,7 @@ void	release_all(t_cub *cub)
 	free(cub->rgb_c);
 	free(cub->rgb_f);
 	free(cub);
+	exit (0);
 }
 
 void	free_3d(char ***s)

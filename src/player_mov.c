@@ -40,10 +40,17 @@ void move_player(t_cub *cub, int keycode)
 	xtmp = cub->p_x;
 	ytmp = cub->p_y;
 	player_newpos(cub, keycode);
-	if (check_wall(cub, cub->p_x, cub->p_y))
+	if (check_wall(cub, cub->p_x, cub->p_y) == 1
+		|| check_wall(cub, cub->p_x, cub->p_y) == 2)
 	{
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
+	}
+	if (check_wall(cub, cub->p_x, cub->p_y - 2) == 3
+		|| check_wall(cub, cub->p_x, cub->p_y + 2) == 3)
+	{
+		cub->door = false;
+		cub->map_2d[cub->door_y][cub->door_x] = 'D';
 	}
 }
 
@@ -75,7 +82,6 @@ void	increment_angle(t_cub *cub, int keycode)
 
 int ft_move(int keycode, t_cub *cub)
 {
-	fprintf(stderr, "%d\n", keycode);
 	if (cub->door == true && keycode == OPEN_DOOR)
 	 		cub->map_2d[cub->door_y][cub->door_x] = '0';
 	if (keycode == MOVE_FORWARD)
@@ -91,11 +97,11 @@ int ft_move(int keycode, t_cub *cub)
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
-		exit (0);
+		release_all(cub);
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
-	if (!check_wall(cub, cub->p_minix, cub->p_miniy))
+	//if (!check_wall(cub, cub->p_minix, cub->p_miniy))
 		my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);

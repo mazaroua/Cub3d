@@ -7,12 +7,15 @@ int	check_wall(t_cub *cub, int x, int y)
 
 	fpx = (int)floor(x) / 32;
 	fpy = (int)floor(y) / 32;
-	if (fpx < 0 || fpx > cub->win_width || fpy < 0 || fpy > cub->win_height)
+	if (fpx < 0 || fpx > cub->win_width
+		|| fpy < 0 || fpy > cub->win_height)
 		return (1);
 	if (cub->map_2d[fpy][fpx] == '1')
 		return (1);
 	if (cub->map_2d[fpy][fpx] == 'D')
 		return (2);
+	if (cub->map_2d[fpy][fpx] == 'x')
+		return (3);
 	return (0);
 }
 
