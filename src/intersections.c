@@ -23,6 +23,8 @@ int is_wall(t_cub *cub, double x, double y)
         return (1);
 	if (cub->map_2d[Y][X] == 'D')
 	{
+		cub->door_x = X;
+		cub->door_y = Y;
 		cub->door = true;
 		return (2);
 	}
@@ -31,7 +33,8 @@ int is_wall(t_cub *cub, double x, double y)
 
 int player_up(double angle)
 {
-    if ((angle * (180 / M_PI)) > (double)180 && (angle * (180 / M_PI)) < (double)360)
+    if ((angle * (180 / M_PI)) > (double)180
+		&& (angle * (180 / M_PI)) < (double)360)
         return (1);
     return (0);
 }
@@ -62,12 +65,14 @@ void    next_horizontal_intersection(double rayangle, t_cub *cub)
 void    horizontal_intersection(double rayangle, t_cub *cub)
 {
    	first_horizontal_intersection(rayangle, cub);
-	if (!is_wall(cub, cub->x_h, cub->y_h + 1) && !is_wall(cub, cub->x_h, cub->y_h - 1))
+	if (!is_wall(cub, cub->x_h, cub->y_h + 1)
+		&& !is_wall(cub, cub->x_h, cub->y_h - 1))
 	{
 		while (true)
 		{
 			next_horizontal_intersection(rayangle, cub);
-			if (is_wall(cub, cub->x_h, cub->y_h + 1) || is_wall(cub, cub->x_h, cub->y_h - 1))
+			if (is_wall(cub, cub->x_h, cub->y_h + 1)
+                || is_wall(cub, cub->x_h, cub->y_h - 1))
 				break ;
 		}
  	}
@@ -104,12 +109,14 @@ void	next_ver_intersect(double rayangle, t_cub *cub)
 void	vertical_intersection(double rayangle, t_cub *cub)
 {
 	first_ver_intersect(rayangle, cub);
-	if (!is_wall(cub, cub->x_v + 1, cub->y_v) && !is_wall(cub, cub->x_v - 1, cub->y_v))
+	if (!is_wall(cub, cub->x_v + 1, cub->y_v)
+		&& !is_wall(cub, cub->x_v - 1, cub->y_v))
 	{
 		 while (true)
 		{
 			next_ver_intersect(rayangle, cub);
-			if (is_wall(cub, cub->x_v + 1, cub->y_v) || is_wall(cub, cub->x_v - 1, cub->y_v))
+			if (is_wall(cub, cub->x_v + 1, cub->y_v)
+                || is_wall(cub, cub->x_v - 1, cub->y_v))
 				break ;
 		}
 	}

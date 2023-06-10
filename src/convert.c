@@ -6,9 +6,9 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 
 	if (cub->hori_line == true)
 	{
-		// if (cub->door)
-		// 	tx = cub->door_txt;
-		if (rayangle > M_PI  && rayangle < 2 * M_PI)
+		if (cub->door == true)
+		 	tx = cub->door_txt;
+		else if (rayangle > M_PI  && rayangle < 2 * M_PI)
 			tx = cub->south_txt;
 		else
 			tx = cub->north_txt;

@@ -39,16 +39,9 @@ void move_player(t_cub *cub, int keycode)
 
 	xtmp = cub->p_x;
 	ytmp = cub->p_y;
-	cub->door = false;
 	player_newpos(cub, keycode);
 	if (check_wall(cub, cub->p_x, cub->p_y))
 	{
-		// if (check_wall(cub, cub->p_x, cub->p_y) == 2)
-		// {
-		// 	cub->door_x = cub->p_x;
-		// 	cub->door_y = cub->p_y;
-		// 	cub->door = true;
-		// }
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 	}
@@ -82,6 +75,9 @@ void	increment_angle(t_cub *cub, int keycode)
 
 int ft_move(int keycode, t_cub *cub)
 {
+	fprintf(stderr, "%d\n", keycode);
+	if (cub->door == true && keycode == OPEN_DOOR)
+	 		cub->map_2d[cub->door_y][cub->door_x] = '0';
 	if (keycode == MOVE_FORWARD)
 		move_player(cub, keycode);
 	if (keycode == MOVE_BACKWARD)
@@ -94,11 +90,6 @@ int ft_move(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
-	// if (keycode == OPEN_DOOR)
-	// {
-	// 	if (cub->door)
-	// 		cub->map_2d[cub->door_y][cub->door_x] = '0';
-	// }
 	if (keycode == ESC)
 		exit (0);
 	put_surfaces(cub);

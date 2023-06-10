@@ -1,8 +1,8 @@
 NAME=cub3d
 CFLAGS= #-fsanitize=address
-LINK= -lmlx -framework OpenGL -framework AppKit -lm
-#LINK = -lmlx -lXext -lX11 -lm
-INC= inc/cub.h
+#LINK= -lmlx -framework OpenGL -framework AppKit -lm
+LINK = -lmlx -lXext -lX11 -lm
+INC= inc/cub.h  inc/objects.h inc/get_next_line.h
 
 SRS= src/castrays.c       src/ft_split.c             src/player_mov.c \
 	src/check_map.c      src/get_next_line.c        src/surfaces.c \
