@@ -50,18 +50,20 @@ void move_player(t_cub *cub, int keycode)
 
 void	beside_wall(t_cub *cub, int keycode)
 {
-	if ((check_wall(cub, cub->p_x, cub->p_y - S_SIZE) == 2 
-		|| check_wall(cub, cub->p_x, cub->p_y + S_SIZE) == 2
-		||check_wall(cub, cub->p_x - S_SIZE, cub->p_y) == 2 
-		|| check_wall(cub, cub->p_x + S_SIZE, cub->p_y) == 2)
+	int	door_index;
+	int	door_row;
+
+	door_index = (int)floor(cub->door_x) / S_SIZE;
+	door_row = ((int)floor(cub->door_y) / S_SIZE) - 1;
+	if (cub->d_p_dist >= 0 &&  cub->d_p_dist <= 30 && cub->door
 		&& keycode == OPEN_DOOR)
-		cub->map_2d[cub->door_y][cub->door_x] = 'x';
-	else if (cub->map_2d[cub->door_y][cub->door_x] == 'x'
-		&& (check_wall(cub, cub->p_x, cub->p_y + (S_SIZE + 20)) == 3
-		|| check_wall(cub, cub->p_x, cub->p_y - (S_SIZE + 20)) == 3)
-		|| check_wall(cub, cub->p_x + (S_SIZE + 20), cub->p_y) == 3
-		|| check_wall(cub, cub->p_x - (S_SIZE + 20), cub->p_y) == 3)
-			cub->map_2d[cub->door_y][cub->door_x] = 'D';
+	{
+		printf("7l zbl\n");
+		cub->map_2d[door_row][door_index] = 'x';
+	}
+	/*if (cub->map_2d[door_row][door_index] == 'x'
+		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 30)
+		cub->map_2d[door_row][door_index] = 'D';*/
 }
 
 void	increment_angle(t_cub *cub, int keycode)
@@ -110,7 +112,6 @@ int ft_move(int keycode, t_cub *cub)
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
-	//if (!check_wall(cub, cub->p_minix, cub->p_miniy))
 	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);

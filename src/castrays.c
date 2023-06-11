@@ -1,6 +1,37 @@
 
 #include "../inc/cub.h"
 
+void	catch_door(t_cub *cub, double rayangle)
+{
+	if (cub->vert_line == true) 
+	{
+		if (check_wall(cub, cub->next_x + 1, cub->next_y) == 2
+        	|| check_wall(cub, cub->next_x - 1, cub->next_y) == 2)
+		{
+			cub->door = true;
+			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 40)
+			{
+				cub->door_x =  cub->next_x;
+				cub->door_y = cub->next_y;
+			}
+		}
+	}
+	if (cub->hori_line == true)
+	{
+		if (check_wall(cub, cub->next_x, cub->next_y + 1) == 2
+            || check_wall(cub, cub->next_x, cub->next_y - 1) == 2)
+		{
+			cub->door = true;
+			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 40)
+			{
+				cub->door_x =  cub->next_x;
+				cub->door_y = cub->next_y;
+			};
+		}
+	}
+}
+
+
 void DDA(t_cub *cub)
 {	
 	t_ray	ray;
@@ -47,6 +78,10 @@ void	cast_all_rays(t_cub *cub)
 	while (i < NUM_RAYS)
 	{
 		intersections(rayangle, cub);
+		catch_door(cub, rayangle);
+		if ((int)rayangle == (int)cub->angle && cub->door)
+			cub->d_p_dist = cal_distance(cub->p_x, cub->p_y,\
+			cub->next_x, cub->next_y);
 	 	rayangle += FOV_AGL / (double)NUM_RAYS;
 		rayangle = set_angle(rayangle);
 		render_walls(rayangle, cub, i);

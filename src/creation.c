@@ -5,8 +5,8 @@ int	check_wall(t_cub *cub, int x, int y)
 	int	fpx;
 	int	fpy;
 
-	fpx = (int)floor(x) / 32;
-	fpy = (int)floor(y) / 32;
+	fpx = (int)floor(x) / S_SIZE;
+	fpy = (int)floor(y) / S_SIZE;
 	if (fpx < 0 || fpx > cub->win_width
 		|| fpy < 0 || fpy > cub->win_height)
 		return (1);

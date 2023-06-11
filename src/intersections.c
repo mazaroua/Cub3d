@@ -22,12 +22,7 @@ int is_wall(t_cub *cub, double x, double y)
     if (cub->map_2d[Y][X] == '1')
         return (1);
 	if (cub->map_2d[Y][X] == 'D')
-	{
-		cub->door_x = X;
-		cub->door_y = Y;
-		cub->door = true;
 		return (2);
-	}
     return (0);
 }
 
