@@ -20,7 +20,7 @@ char	**ft_split2(char const *s);
 int		whitespaces(char c);
 void	free_2d(char **str);
 void	free_3d(char ***s);
-void	release_all(t_cub *cub);
+void	release_all(t_cub *cub, char f);
 int		size_map(char **str);
 void    check_elements(char ***map, t_cub *cub);
 int		whitespaces(char c);

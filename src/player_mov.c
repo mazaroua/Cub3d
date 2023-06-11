@@ -46,12 +46,22 @@ void move_player(t_cub *cub, int keycode)
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 	}
-	if (check_wall(cub, cub->p_x, cub->p_y - 2) == 3
-		|| check_wall(cub, cub->p_x, cub->p_y + 2) == 3)
-	{
-		cub->door = false;
-		cub->map_2d[cub->door_y][cub->door_x] = 'D';
-	}
+}
+
+void	beside_wall(t_cub *cub, int keycode)
+{
+	if ((check_wall(cub, cub->p_x, cub->p_y - S_SIZE) == 2 
+		|| check_wall(cub, cub->p_x, cub->p_y + S_SIZE) == 2
+		||check_wall(cub, cub->p_x - S_SIZE, cub->p_y) == 2 
+		|| check_wall(cub, cub->p_x + S_SIZE, cub->p_y) == 2)
+		&& keycode == OPEN_DOOR)
+		cub->map_2d[cub->door_y][cub->door_x] = 'x';
+	else if (cub->map_2d[cub->door_y][cub->door_x] == 'x'
+		&& (check_wall(cub, cub->p_x, cub->p_y + (S_SIZE + 20)) == 3
+		|| check_wall(cub, cub->p_x, cub->p_y - (S_SIZE + 20)) == 3)
+		|| check_wall(cub, cub->p_x + (S_SIZE + 20), cub->p_y) == 3
+		|| check_wall(cub, cub->p_x - (S_SIZE + 20), cub->p_y) == 3)
+			cub->map_2d[cub->door_y][cub->door_x] = 'D';
 }
 
 void	increment_angle(t_cub *cub, int keycode)
@@ -82,8 +92,7 @@ void	increment_angle(t_cub *cub, int keycode)
 
 int ft_move(int keycode, t_cub *cub)
 {
-	if (cub->door == true && keycode == OPEN_DOOR)
-	 		cub->map_2d[cub->door_y][cub->door_x] = '0';
+	beside_wall(cub, keycode);
 	if (keycode == MOVE_FORWARD)
 		move_player(cub, keycode);
 	if (keycode == MOVE_BACKWARD)
@@ -97,12 +106,12 @@ int ft_move(int keycode, t_cub *cub)
 	if (keycode == LEFT_ROTATION)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
-		release_all(cub);
+		release_all(cub, 'f');
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
 	//if (!check_wall(cub, cub->p_minix, cub->p_miniy))
-		my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
+	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }

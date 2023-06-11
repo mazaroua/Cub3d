@@ -74,15 +74,16 @@ void	pars_cub(t_cub *cub, char *arg)
 	check_map(cub->map_2d, cub, -1);
 }
 
-// void	f()
-// {
-// 	system("leaks cub3d");
-// }
+void	f()
+{
+	system("leaks cub3d");
+}
 
 int	main(int ac, char **av)
 {
 	t_cub	*cub;
 
+	// atexit(f);
 	if (ac != 2)
 		exit_error(0);
 	if (v_extension(av[1]))
@@ -90,5 +91,5 @@ int	main(int ac, char **av)
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
 	creation(cub);
-	release_all(cub);
+	release_all(cub, 'c');
 }

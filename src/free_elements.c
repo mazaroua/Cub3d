@@ -25,12 +25,12 @@ void    exit_error(t_cub *cub)
 			free(cub);
 		}
 		else
-       		release_all(cub);
+       		release_all(cub, 'c');
 	}
     exit (EXIT_FAILURE);
 }
 
-void	release_all(t_cub *cub)
+void	release_all(t_cub *cub, char f)
 {
 	free(cub->map_1d);
 	free_3d(cub->element);
@@ -43,6 +43,15 @@ void	release_all(t_cub *cub)
 	free(cub->c_color);
 	free(cub->rgb_c);
 	free(cub->rgb_f);
+	free(cub->data);
+	if (f == 'f')
+	{
+		free(cub->door_txt);
+		free(cub->south_txt);
+		free(cub->north_txt);
+		free(cub->west_txt);
+		free(cub->east_txt);
+	}
 	free(cub);
 	exit (0);
 }
