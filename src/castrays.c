@@ -9,7 +9,7 @@ void	catch_door(t_cub *cub, double rayangle)
         	|| check_wall(cub, cub->next_x - 1, cub->next_y) == 2)
 		{
 			cub->door = true;
-			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 40)
+			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 32)
 			{
 				cub->door_x =  cub->next_x;
 				cub->door_y = cub->next_y;
@@ -22,11 +22,11 @@ void	catch_door(t_cub *cub, double rayangle)
             || check_wall(cub, cub->next_x, cub->next_y - 1) == 2)
 		{
 			cub->door = true;
-			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 40)
+			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 32)
 			{
 				cub->door_x =  cub->next_x;
 				cub->door_y = cub->next_y;
-			};
+			}
 		}
 	}
 }

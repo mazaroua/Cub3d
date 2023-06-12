@@ -73,6 +73,8 @@ void put_player(t_cub *cub)
 	cub->p_y *= S_SIZE;
 	cub->p_x += S_SIZE / 2;
 	cub->p_y += S_SIZE / 2;
+	cub->door_index = 0;
+	cub->door_row = 0;
 	cub->p_minix = cub->p_x * SCALE_SIZE;
 	cub->p_miniy = cub->p_y * SCALE_SIZE;
 	put_square(cub, cub->p_minix, cub->p_miniy, 0xff0000);
