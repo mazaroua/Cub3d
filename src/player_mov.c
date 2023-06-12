@@ -55,16 +55,20 @@ void	beside_wall(t_cub *cub, int keycode)
 	{
 		cub->door_index = (int)floor(cub->door_x) / S_SIZE;
 		cub->door_row = (int)floor(cub->door_y) / S_SIZE;
+		if (check_wall(cub, cub->p_x, cub->p_y - S_SIZE) == 2)
+		{
+			cub->door_row -= 1;
+			if (check_wall(cub, cub->door_index * 32, cub->door_row * 32) != 2)
+				cub->door_row += 1;
+		}
 		if (check_wall(cub, cub->p_x - S_SIZE, cub->p_y) == 2)
 			cub->door_index -= 1;
-		if (check_wall(cub, cub->p_x, cub->p_y - S_SIZE) == 2)
-			cub->door_row -= 1;
 		cub->map_2d[cub->door_row][cub->door_index] = 'x';
 	}
 	if (cub->map_2d[cub->door_row][cub->door_index] == 'x'
 		&& (cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 36
 		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) < 40))
-		cub->map_2d[cub->door_row][cub->door_index] = 'D';
+			cub->map_2d[cub->door_row][cub->door_index] = 'D';
 }
 
 void	increment_angle(t_cub *cub, int keycode)
