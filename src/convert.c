@@ -4,6 +4,7 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 {
 	t_tx	*tx;
 
+	tx = NULL;
 	if (cub->door == true)
 		tx = cub->door_txt;
 	else if (cub->hori_line == true)
@@ -12,7 +13,6 @@ t_tx	*depends_side(double rayangle, t_cub *cub)
 			tx = cub->south_txt;
 		else
 			tx = cub->north_txt;
-
 	}
 	else if (cub->vert_line == true)
 	{

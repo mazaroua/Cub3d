@@ -2,9 +2,12 @@
 
 bool    right_side(double rayangle)
 {
-    if ((rayangle * (180 / M_PI)) > 270 && (rayangle * (180 / M_PI)) <= 360
-		|| fabs((rayangle * (180 / M_PI))) >= 0 && (rayangle * (180 / M_PI)) < 90)
+    if ((rayangle > 3 * (M_PI / 2) && rayangle <= 2 * M_PI)
+        || (fabs(rayangle) >= 0 && rayangle < M_PI / 2))
         return (true);
+    // if ((rayangle * (180 / M_PI) > 270 && rayangle * (180 / M_PI) <= 360)
+	// 	|| (fabs(rayangle * (180 / M_PI)) >= 0 && rayangle * (180 / M_PI) < 90))
+    //     return (true);
     return (false);
 }
 

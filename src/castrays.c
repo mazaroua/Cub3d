@@ -1,7 +1,7 @@
 
 #include "../inc/cub.h"
 
-void	catch_door(t_cub *cub, double rayangle)
+void	catch_door(t_cub *cub)
 {
 	if (cub->vert_line == true) 
 	{
@@ -78,7 +78,7 @@ void	cast_all_rays(t_cub *cub)
 	while (i < NUM_RAYS)
 	{
 		intersections(rayangle, cub);
-		catch_door(cub, rayangle);
+		catch_door(cub);
 		if ((int)rayangle == (int)cub->angle && cub->door)
 			cub->d_p_dist = cal_distance(cub->p_x, cub->p_y,\
 			cub->next_x, cub->next_y);

@@ -55,7 +55,7 @@ t_tx   *new_texture(t_cub *cub, char *file)
 	return (tx);
 }
 
-void	texture_failure(t_cub *cub, t_tx *t)
+void	texture_failure(t_tx *t)
 {
 	if (t->ptr == NULL)
 	{
@@ -71,15 +71,15 @@ void	check_texture(t_cub *cub)
 
 	t = ft_malloc(sizeof(t_tx));
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->n_texture, &t->width, &t->height);
-	texture_failure(cub, t);
+	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, &t->width, &t->height);
-	texture_failure(cub, t);
+	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->s_texture, &t->width, &t->height);
-	texture_failure(cub, t);
+	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->e_texture, &t->width, &t->height);
-	texture_failure(cub, t);
+	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, "textures/door.xpm", &t->width, &t->height);
-	texture_failure(cub, t);
+	texture_failure(t);
 	free(t);
 }
 
