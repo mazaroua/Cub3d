@@ -1,5 +1,26 @@
 #include "../inc/cub.h"
 
+void	mini_player(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < 3)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			my_mlx_pixel_put(cub, (int)cub->p_minix + i,\
+			 (int)cub->p_miniy + j, 0xff00000);
+			i += 1;
+		}
+		j += 1;
+	}
+	cub->mini_nxtx = (cub->p_x + cos(cub->angle) * 20) * SCALE_SIZE;
+	cub->mini_nxty = (cub->p_y + sin(cub->angle) * 20) * SCALE_SIZE ;
+	DDA(cub);
+}
 void	player_newpos(t_cub *cub, int key)
 {
 	if (key == MOVE_FORWARD)
@@ -70,7 +91,7 @@ void	beside_wall(t_cub *cub, int keycode)
 		cub->map_2d[cub->door_row][cub->door_index] = 'x';
 	}
 	if (cub->map_2d[cub->door_row][cub->door_index] == 'x'
-		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 32)
+		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 46)
 			cub->map_2d[cub->door_row][cub->door_index] = 'D';
 }
 
@@ -120,7 +141,7 @@ int ft_move(int keycode, t_cub *cub)
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	draw_mini_map(cub);
-	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
+	mini_player(cub);
 	put_cursos(cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);

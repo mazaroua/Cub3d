@@ -36,10 +36,8 @@ void DDA(t_cub *cub)
 {	
 	t_ray	ray;
 
-	ray.nxtx = cub->p_x + cos(cub->angle) * 20;
-	ray.nxty = cub->p_y + sin(cub->angle) * 20;
-	ray.dx = (ray.nxtx - cub->p_x) * SCALE_SIZE;
-    ray.dy = (ray.nxty - cub->p_y) * SCALE_SIZE;
+	ray.dx = cub->mini_nxtx - cub->p_minix;
+    ray.dy = cub->mini_nxty - cub->p_miniy;
 	if (abs(ray.dx) > abs(ray.dy))
 		ray.steps = abs(ray.dx);
 	else
