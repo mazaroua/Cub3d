@@ -30,8 +30,6 @@ void	check_map(char **map, t_cub *cub, int i)
 		j = -1;
 		while (map[i][++j])
 		{
-			//if (map[i][j] == 'D' && (map[i][j + 1] != '1' || map[i][j - 1] != '1'))
-			//	exit_error(cub);
 			if (poss_char(map[i][j]) == 0)
 				exit_error(cub);
 			if (pos == true && poss_char(map[i][j]) != 1 && poss_char(map[i][j]) != 68)

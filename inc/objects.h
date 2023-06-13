@@ -1,8 +1,8 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define WIN_WITH	800
-# define WIN_HEIGTH 600
+# define WIN_WITH	1280
+# define WIN_HEIGTH 1024
 # define NUM_RAYS	WIN_WITH
 # define S_SIZE		32
 # define FOV_AGL  (60 * (M_PI / 180))
@@ -13,15 +13,15 @@
 # define EAST	'E'
 # define WEST	'W'
 # define DOR	'D'
-# define RIGHT_ROTATION 65363
-# define LEFT_ROTATION 65361
-# define MOVE_FORWARD 122
-# define MOVE_BACKWARD 115
-# define MOVE_RIGHT 100
-# define MOVE_LEFT 113
-# define ESC 65307
+# define RIGHT_ROTATION 124
+# define LEFT_ROTATION 123
+# define MOVE_FORWARD 13
+# define MOVE_BACKWARD 1
+# define MOVE_RIGHT 2
+# define MOVE_LEFT 0
+# define ESC 53
 # define SCALE_SIZE 0.3
-# define OPEN_DOOR 32
+# define OPEN_DOOR 49
 //z  122
 //q  113
 //s  115
@@ -131,8 +131,8 @@ typedef struct s_cub
 	double	p_miniy;
 	int		door_index;
 	int		door_row;
-	//double	nxt_minix;
-	//double	nxt_miniy;
+	int     ROT_TO_RIGHT;
+    int     ROT_TO_LEFT;
 	double	x_offset;
 }	t_cub;
 

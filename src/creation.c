@@ -1,5 +1,75 @@
 #include "../inc/cub.h"
 
+void    mouse_rotate(t_cub *cub)
+{
+    if (cub->ROT_TO_RIGHT)
+    {
+        if (cub->angle >= 355 * (M_PI / 180))
+        {
+                cub->angle = 0;
+                return ;
+        }
+        cub->angle = cub->angle * (180 / M_PI);
+        cub->angle += 2;
+        cub->angle = cub->angle * (M_PI / 180);
+
+    }
+    else if (cub->ROT_TO_LEFT)
+    {
+        if (cub->angle <= 0)
+        {
+            cub->angle = 355 * (M_PI / 180);
+            return ;
+        }
+        cub->angle = cub->angle * (180 / M_PI);
+    	cub->angle -= 2;
+        cub->angle = cub->angle * (M_PI / 180);
+
+    }
+    put_surfaces(cub);
+    cast_all_rays(cub);
+	draw_mini_map(cub);
+	put_cursos(cub);
+    mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
+}
+
+int    mouse(int x, int y, t_cub *cub)
+{
+    (void)y;
+    cub->ROT_TO_RIGHT = 0;
+    cub->ROT_TO_LEFT = 0;
+    static int    last_x;
+
+    if (x > WIN_WITH / 2)
+    {
+        if (x < last_x)
+        {
+            cub->ROT_TO_LEFT = 1;
+            last_x = x;
+        }
+        else if (x > last_x)
+        {
+            last_x = x;
+            cub->ROT_TO_RIGHT = 1;
+        }
+    }
+    else if (x < WIN_WITH / 2)
+    {
+        if (x > last_x)
+        {
+            cub->ROT_TO_RIGHT = 1;
+            last_x = x;
+        }
+        else if (x < last_x)
+        {
+            last_x = x;
+            cub->ROT_TO_LEFT = 1;
+        }
+    }
+    mouse_rotate(cub);
+    return (0);
+}
+
 int	check_wall(t_cub *cub, int x, int y)
 {
 	int	fpx;
@@ -81,6 +151,7 @@ void put_player(t_cub *cub)
 	set_textures(cub);
 	draw_mini_map(cub);
 	cast_all_rays(cub);
+	put_cursos(cub);
 }
 
 void creation(t_cub *cub)
@@ -93,6 +164,7 @@ void creation(t_cub *cub)
 	put_surfaces(cub);
 	put_player(cub);
 	mlx_hook(cub->w_ptr, 02, (1L << 0), ft_move, cub);
+	mlx_hook(cub->w_ptr, 6, 0,  &mouse, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_loop(cub->m_ptr);
 }

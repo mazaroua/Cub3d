@@ -25,7 +25,7 @@ void    exit_error(t_cub *cub)
 			free(cub);
 		}
 		else
-       		release_all(cub, 'c');
+       		release_all(cub, 'x');
 	}
     exit (EXIT_FAILURE);
 }

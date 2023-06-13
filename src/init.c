@@ -18,6 +18,8 @@ void    init_values(t_cub *cub)
 
     cub->y_map = 0;
 	cub->x_map = 0;
+	cub->door_index = 0;
+	cub->door_row = 0;
     tmp = 0;
 	cub->data = ft_malloc(sizeof(t_data));
 	while (cub->map_2d[cub->y_map])

@@ -83,7 +83,6 @@ int	main(int ac, char **av)
 {
 	t_cub	*cub;
 
-	// atexit(f);
 	if (ac != 2)
 		exit_error(0);
 	if (v_extension(av[1]))
@@ -91,5 +90,5 @@ int	main(int ac, char **av)
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
 	creation(cub);
-	release_all(cub, 'c');
+	release_all(cub, 'x');
 }

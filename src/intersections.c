@@ -37,7 +37,9 @@ int player_up(double angle)
 void    first_horizontal_intersection(double rayangle, t_cub *cub)
 {
 	if (player_up(rayangle))
+    {
         cub->y_h = floor(cub->p_y / S_SIZE) * S_SIZE;
+    }
     else
         cub->y_h = floor(cub->p_y / S_SIZE) * S_SIZE + S_SIZE;
     cub->x_h = (cub->y_h - cub->p_y) / tan(rayangle) + cub->p_x;

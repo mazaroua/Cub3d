@@ -50,7 +50,7 @@ void move_player(t_cub *cub, int keycode)
 
 void	beside_wall(t_cub *cub, int keycode)
 {
-	if (cub->d_p_dist >= 0 &&  cub->d_p_dist <= 30 && cub->door
+	if (cub->d_p_dist >= 0 &&  cub->d_p_dist <= 29 && cub->door
 		&& keycode == OPEN_DOOR)
 	{
 		cub->door_index = (int)floor(cub->door_x) / S_SIZE;
@@ -62,12 +62,15 @@ void	beside_wall(t_cub *cub, int keycode)
 				cub->door_row += 1;
 		}
 		if (check_wall(cub, cub->p_x - S_SIZE, cub->p_y) == 2)
+		{
 			cub->door_index -= 1;
+			if (check_wall(cub, cub->door_index * 32, cub->door_row * 32) != 2)
+				cub->door_index += 1;
+		}
 		cub->map_2d[cub->door_row][cub->door_index] = 'x';
 	}
 	if (cub->map_2d[cub->door_row][cub->door_index] == 'x'
-		&& (cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 36
-		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) < 40))
+		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 32)
 			cub->map_2d[cub->door_row][cub->door_index] = 'D';
 }
 
@@ -118,6 +121,7 @@ int ft_move(int keycode, t_cub *cub)
 	cast_all_rays(cub);
 	draw_mini_map(cub);
 	my_mlx_pixel_put(cub, cub->p_minix, cub->p_miniy, 0xff00000);
+	put_cursos(cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }
