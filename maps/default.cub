@@ -1,12 +1,12 @@
-NO textures/texture7.xpm
-SO textures/texture7.xpm
-WE textures/texture7.xpm
-EA textures/texture7.xpm
+NO textures/texture8.xpm
+SO textures/texture8.xpm
+WE textures/texture8.xpm
+EA textures/texture8.xpm
 
 F 27,32,32
 C 32,58,68             
 
-1111111111111111111111 1111111111     
+11111111111111111111111111111111     
 100000000011000000000000100000001
 101100000111000000000000100000001
 10010000000D000000000000110101111

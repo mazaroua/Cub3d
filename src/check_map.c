@@ -27,7 +27,7 @@ void	check_map(char **map, t_cub *cub, int i)
 		exit_error(cub);
 	while (map[++i])
 	{
-		j = -1;
+		j = (-1);
 		while (map[i][++j])
 		{
 			if (poss_char(map[i][j]) == 0)
@@ -46,55 +46,49 @@ void	check_map(char **map, t_cub *cub, int i)
 }
 int check_sp(char **s,int i ,int j)
 {
-	printf("here\n");
 	if( s[i][j] == ' ')
 	{
-		printf("here11\n");
-		if (i && (int)ft_strlen(s[i - 1]) > j && s[i - 1][j] != ' ' && s[i - 1][j] != '1')
-			return -1;
-		if (s[i][j + 1] && s[i][j + 1] != ' ' && s[i][j + 1] != '1')
-			return -1;
-		if (s[i + 1] && (int)ft_strlen(s[i + 1]) > j &&  s[i + 1][j] != ' ' && s[i + 1][j] != '1')
-			return -1;
+		if (i && (int)ft_strlen(s[i - 1]) > j
+			&& s[i - 1][j] != ' ' && s[i - 1][j] != '1')
+			return (-1);
+		if (s[i][j + 1] && s[i][j + 1] != ' '
+			&& s[i][j + 1] != '1')
+			return (-1);
+		if (s[i + 1] && (int)ft_strlen(s[i + 1]) > j
+			&&  s[i + 1][j] != ' ' && s[i + 1][j] != '1')
+			return (-1);
 		if (j  && s[i][j - 1] != ' ' && s[i][j - 1] != '1')
-			return -1;
+			return (-1);
 
 	}
-	return 0;
+	return (0);
 }
 
 void	check_walls2(char **s, t_cub *cub)
 {
-	printf("here\n");
 	int	i;
 	int	j;
 
 	i = 0;
 	while (s[i])
 	{
-	printf("here\n");
-
 		j = 0;
 		while(s[i][j++] == ' ');
-		if (s[i][j - 1] != 1)
+		if (s[i][j - 1] != '1')
 				exit_error(cub);
 		j = 0;
 		while (s[i][j])
 		{
 			if(i == 0 && s[i][j] != ' ' && s[i][j] != '1')
-					exit_error(cub);
-
+				exit_error(cub);
 			if(check_sp(s, i , j) == -1)
-					exit_error(cub);
-
+				exit_error(cub);
 			if(!s[i + 1]  && s[i][j] != ' ' && s[i][j] != '1')
-
-					exit_error(cub);
-
+				exit_error(cub);
 			j++;
 		}
 		while(s[i][--j] == ' ');
-		if (s[i][j] != 1)
+		if (s[i][j] != '1')
 				exit_error(cub);
 		i++;
 	}
