@@ -89,6 +89,7 @@ int	main(int ac, char **av)
 		exit_error(0);
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
+	check_walls2(cub->map_2d, cub);
 	creation(cub);
 	release_all(cub, 'x');
 }

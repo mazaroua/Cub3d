@@ -1,8 +1,8 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define WIN_WITH	1024
-# define WIN_HEIGTH 800
+# define WIN_WITH	1280
+# define WIN_HEIGTH 1024
 # define NUM_RAYS	WIN_WITH
 # define S_SIZE		32
 # define FOV_AGL  (60 * (M_PI / 180))

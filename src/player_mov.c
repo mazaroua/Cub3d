@@ -12,10 +12,7 @@ void	still_open(t_cub *cub)
 		{
 		 	if (j != cub->door_row && i != cub->door_index
 				&& cub->map_2d[j][i] == 'x')
-			{
-				printf("x = %d y = %d  -->%c\n", i, j, cub->map_2d[j][i]);
 				cub->map_2d[j][i] = 'D';
-			}
 			i += 1;
 		}
 		j += 1;
