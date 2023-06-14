@@ -1,7 +1,7 @@
 NAME=cub3d
-CFLAGS=# -Wextra -Wall -Werror
-#LINK= -lmlx -framework OpenGL -framework AppKit -lm
-LINK = -lmlx -lXext -lX11 -lm
+CFLAGS= -Wextra -Wall -Werror
+LINK= -lmlx -framework OpenGL -framework AppKit -lm
+#LINK = -lmlx -lXext -lX11 -lm
 INC= inc/cub.h  inc/objects.h inc/get_next_line.h
 
 SRS= src/castrays.c       src/ft_split.c             src/player_mov.c \

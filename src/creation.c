@@ -126,11 +126,11 @@ void draw_mini_map(t_cub *cub)
 			if (x > 0)
 				cofx = (x * S_SIZE) * SCALE_SIZE;
 			if (cub->map_2d[y][x] == '1')
-				put_square(cub, cofx, cofy, 0x00ffff);
+				put_square(cub, cofx, cofy, 0x4A4F50);
 			else if (cub->map_2d[y][x] == 'D')
-				put_square(cub, cofx, cofy, 0x964B00);
+				put_square(cub, cofx, cofy, 0xFEDF32);
 			else
-				put_square(cub, cofx, cofy, 0x808080);
+				put_square(cub, cofx, cofy, 0x669A9E);
 			x += 1;
 		}
 		y += 1;

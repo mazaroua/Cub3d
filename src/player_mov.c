@@ -1,5 +1,27 @@
 #include "../inc/cub.h"
 
+void	still_open(t_cub *cub)
+{
+	int	i;
+	int	j;
+	j = 0;
+	while (cub->map_2d[j])
+	{
+		i = 0;
+		while (cub->map_2d[j][i])
+		{
+		 	if (j != cub->door_row && i != cub->door_index
+				&& cub->map_2d[j][i] == 'x')
+			{
+				printf("x = %d y = %d  -->%c\n", i, j, cub->map_2d[j][i]);
+				cub->map_2d[j][i] = 'D';
+			}
+			i += 1;
+		}
+		j += 1;
+	}
+}
+
 void	mini_player(t_cub *cub)
 {
 	int	i;
@@ -21,6 +43,7 @@ void	mini_player(t_cub *cub)
 	cub->mini_nxty = (cub->p_y + sin(cub->angle) * 20) * SCALE_SIZE ;
 	DDA(cub);
 }
+
 void	player_newpos(t_cub *cub, int key)
 {
 	if (key == MOVE_FORWARD)
@@ -71,28 +94,23 @@ void move_player(t_cub *cub, int keycode)
 
 void	beside_wall(t_cub *cub, int keycode)
 {
-	if (cub->d_p_dist >= 0 &&  cub->d_p_dist <= 29 && cub->door
+	if (cub->d_p_dist >= 0 &&  cub->d_p_dist < 6 && cub->door
 		&& keycode == OPEN_DOOR)
 	{
 		cub->door_index = (int)floor(cub->door_x) / S_SIZE;
 		cub->door_row = (int)floor(cub->door_y) / S_SIZE;
-		if (check_wall(cub, cub->p_x, cub->p_y - S_SIZE) == 2)
-		{
+		if (check_wall(cub, cub->door_x, cub->door_y - S_SIZE) == 2)
 			cub->door_row -= 1;
-			if (check_wall(cub, cub->door_index * 32, cub->door_row * 32) != 2)
-				cub->door_row += 1;
-		}
-		if (check_wall(cub, cub->p_x - S_SIZE, cub->p_y) == 2)
-		{
+		if (check_wall(cub, cub->door_x - S_SIZE, cub->door_y) == 2)
 			cub->door_index -= 1;
-			if (check_wall(cub, cub->door_index * 32, cub->door_row * 32) != 2)
-				cub->door_index += 1;
-		}
 		cub->map_2d[cub->door_row][cub->door_index] = 'x';
 	}
 	if (cub->map_2d[cub->door_row][cub->door_index] == 'x'
 		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 46)
-			cub->map_2d[cub->door_row][cub->door_index] = 'D';
+	{
+		cub->map_2d[cub->door_row][cub->door_index] = 'D';
+		still_open(cub);
+	}
 }
 
 void	increment_angle(t_cub *cub, int keycode)
