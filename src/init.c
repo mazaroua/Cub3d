@@ -20,11 +20,11 @@ void    init_values(t_cub *cub)
 	cub->x_map = 0;
 	cub->door_index = 0;
 	cub->door_row = 0;
-    tmp = 0;
 	cub->data = ft_malloc(sizeof(t_data));
 	while (cub->map_2d[cub->y_map])
 	{
 		cub->x_map = 0;
+   		tmp = 0;
 		while (cub->map_2d[cub->y_map][cub->x_map])
 			cub->x_map += 1;
 		if (cub->x_map > tmp)
@@ -32,6 +32,8 @@ void    init_values(t_cub *cub)
 		cub->y_map += 1;
 	}
 	cub->x_map = tmp;
+	printf("x = %d\n", cub->x_map);
+	printf("y = %d\n", cub->y_map);
     cub->win_width = cub->x_map * S_SIZE;
     cub->win_height = cub->y_map * S_SIZE;
     get_angle(cub);

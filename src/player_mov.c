@@ -138,6 +138,7 @@ void	increment_angle(t_cub *cub, int keycode)
 
 int ft_move(int keycode, t_cub *cub)
 {
+	printf("%d\n", keycode);
 	beside_wall(cub, keycode);
 	if (keycode == MOVE_FORWARD)
 		move_player(cub, keycode);
@@ -155,8 +156,13 @@ int ft_move(int keycode, t_cub *cub)
 		release_all(cub, 'f');
 	put_surfaces(cub);
 	cast_all_rays(cub);
-	draw_mini_map(cub);
-	mini_player(cub);
+	if (keycode == CTRL)
+	{
+		draw_mini_map(cub);
+		mini_player(cub);
+	}
+	else
+		zoomed_map(cub);
 	put_cursos(cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);

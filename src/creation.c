@@ -28,7 +28,7 @@ void    mouse_rotate(t_cub *cub)
     }
     put_surfaces(cub);
     cast_all_rays(cub);
-	draw_mini_map(cub);
+	// draw_mini_map(cub);
 	put_cursos(cub);
     mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 }
@@ -147,9 +147,10 @@ void put_player(t_cub *cub)
 	cub->door_row = 0;
 	cub->p_minix = cub->p_x * SCALE_SIZE;
 	cub->p_miniy = cub->p_y * SCALE_SIZE;
-	put_square(cub, cub->p_minix, cub->p_miniy, 0xff0000);
+	// draw_mini_map(cub);
+	zoomed_map(cub);
+	//put_square(cub, cub->p_minix, cub->p_miniy, 0xff0000);
 	set_textures(cub);
-	draw_mini_map(cub);
 	cast_all_rays(cub);
 	put_cursos(cub);
 }
