@@ -20,7 +20,7 @@
 # define MOVE_RIGHT 2
 # define MOVE_LEFT 0
 # define ESC 53
-# define SCALE_SIZE 0.5
+# define SCALE_SIZE 0.25
 # define OPEN_DOOR 49
 # define CTRL	256
 //z  122

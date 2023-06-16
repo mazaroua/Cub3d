@@ -147,8 +147,6 @@ void put_player(t_cub *cub)
 	cub->door_row = 0;
 	cub->p_minix = cub->p_x * SCALE_SIZE;
 	cub->p_miniy = cub->p_y * SCALE_SIZE;
-	// draw_mini_map(cub);
-	//put_square(cub, cub->p_minix, cub->p_miniy, 0xff0000);
 	set_textures(cub);
 	cast_all_rays(cub);
 	zoomed_map(cub);
@@ -170,9 +168,9 @@ void creation(t_cub *cub)
 	, &cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);
 	put_player(cub);
-	mlx_hook(cub->w_ptr, 02, (1L << 0), ft_move, cub);
+	mlx_hook(cub->w_ptr, 02, (1L<<0), ft_move, cub);
 	mlx_hook(cub->w_ptr, 6, 0,  &mouse, cub);
-	mlx_hook(cub->w_ptr, 17, (1L << 0), ft_close, cub);
+	mlx_hook(cub->w_ptr, 17, 0, ft_close, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_loop(cub->m_ptr);
 }

@@ -9,6 +9,7 @@ void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 	dst = c->data->addr + (y * c->data->line_length + x * (c->data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+
 int	size_map(char **str)
 {
 	int	i;
