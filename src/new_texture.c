@@ -10,8 +10,8 @@ void	horiz_cursor(t_cub * cub)
 	ep = 0;
 	while (ep < 3)
 	{
-		i = (WIN_WITH / 2) - 23;
-		while (i < (WIN_WITH / 2) + 23)
+		i = (WIN_WITH / 2) - 15;
+		while (i < (WIN_WITH / 2) + 15)
 		{
 			my_mlx_pixel_put(cub, i, j + ep, 0xFEDF32);
 			i += 1;
@@ -26,9 +26,9 @@ void	put_cursos(t_cub *cub)
 	int	j;
 	int	ep;
 	horiz_cursor(cub);
-	j = (WIN_HEIGTH / 2) - 23;
+	j = (WIN_HEIGTH / 2) - 15;
 	i = WIN_WITH / 2;
-	while (j < (WIN_HEIGTH / 2) + 23)
+	while (j < (WIN_HEIGTH / 2) + 15)
 	{
 		ep = 0;
 		while (ep < 3)

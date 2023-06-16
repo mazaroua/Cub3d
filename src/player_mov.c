@@ -19,26 +19,28 @@ void	still_open(t_cub *cub)
 	}
 }
 
-void	mini_player(t_cub *cub)
+void	mini_player(t_cub *cub, int x, int y, int size)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < 3)
+	while (j < size)
 	{
 		i = 0;
-		while (i < 3)
+		while (i < size)
 		{
-			my_mlx_pixel_put(cub, (int)cub->p_minix + i,\
-			 (int)cub->p_miniy + j, 0xff00000);
+			my_mlx_pixel_put(cub, x + i, y + j, 0xff00000);
 			i += 1;
 		}
 		j += 1;
 	}
-	cub->mini_nxtx = (cub->p_x + cos(cub->angle) * 20) * SCALE_SIZE;
-	cub->mini_nxty = (cub->p_y + sin(cub->angle) * 20) * SCALE_SIZE ;
-	DDA(cub);
+	if (size == 3)
+	{
+ 		cub->mini_nxtx = (cub->p_x + cos(cub->angle) * 20) * SCALE_SIZE;
+		cub->mini_nxty = (cub->p_y + sin(cub->angle) * 20) * SCALE_SIZE;
+ 		DDA(cub);
+	}
 }
 
 void	player_newpos(t_cub *cub, int key)
@@ -138,7 +140,6 @@ void	increment_angle(t_cub *cub, int keycode)
 
 int ft_move(int keycode, t_cub *cub)
 {
-	printf("%d\n", keycode);
 	beside_wall(cub, keycode);
 	if (keycode == MOVE_FORWARD)
 		move_player(cub, keycode);
@@ -159,7 +160,7 @@ int ft_move(int keycode, t_cub *cub)
 	if (keycode == CTRL)
 	{
 		draw_mini_map(cub);
-		mini_player(cub);
+		mini_player(cub, cub->p_minix, cub->p_miniy, 3);
 	}
 	else
 		zoomed_map(cub);

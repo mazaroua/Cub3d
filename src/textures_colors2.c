@@ -85,8 +85,5 @@ void	valid_colors(t_cub *cub, char *s, char c)
 		ft_color(cub, code, i, c);
 		i += 1;
 	}
-	if (cub->rgb_c->r == cub->rgb_f->r && cub->rgb_c->g == cub->rgb_f->g 
-		&& cub->rgb_c->b ==  cub->rgb_f->b)
-		exit_error(cub);
 	free_2d(sp);
 }

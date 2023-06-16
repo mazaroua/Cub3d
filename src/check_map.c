@@ -2,7 +2,7 @@
 
 char	poss_char(char c)
 {
-	if (c == '0' || c == '1' || whitespaces(c))
+	if (c == '0' || c == '1' || c == ' ')
 		return (1);
 	if (c == 'N')
 		return (NORTH);

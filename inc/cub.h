@@ -53,5 +53,6 @@ void    put_square(t_cub *cub, int x, int y, int color);
 void	put_cursos(t_cub *cub);
 void	check_walls2(char **s, t_cub *cub);
 void	zoomed_map(t_cub *cub);
+void	mini_player(t_cub *cub, int x, int y, int size);
 
 #endif
