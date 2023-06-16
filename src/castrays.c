@@ -1,12 +1,28 @@
 
 #include "../inc/cub.h"
 
+bool	hit_door(t_cub *cub, char c)
+{
+	if (c == 'v')
+	{
+		if (check_wall(cub, cub->next_x + 1, cub->next_y) == 2
+				|| check_wall(cub, cub->next_x - 1, cub->next_y) == 2)
+			return (true);
+	}
+	if (c == 'h')
+	{
+		if (check_wall(cub, cub->next_x, cub->next_y + 1) == 2
+        	|| check_wall(cub, cub->next_x, cub->next_y - 1) == 2)
+			return (true);
+	}
+	return (false);
+}
+
 void	catch_door(t_cub *cub)
 {
 	if (cub->vert_line == true) 
 	{
-		if (check_wall(cub, cub->next_x + 1, cub->next_y) == 2
-        	|| check_wall(cub, cub->next_x - 1, cub->next_y) == 2)
+		if (hit_door(cub, 'v'))
 		{
 			cub->door = true;
 			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 6)
@@ -18,8 +34,7 @@ void	catch_door(t_cub *cub)
 	}
 	if (cub->hori_line == true)
 	{
-		if (check_wall(cub, cub->next_x, cub->next_y + 1) == 2
-            || check_wall(cub, cub->next_x, cub->next_y - 1) == 2)
+		if (hit_door(cub, 'h'))
 		{
 			cub->door = true;
 			if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) < 6)

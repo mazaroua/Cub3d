@@ -138,9 +138,8 @@ void	increment_angle(t_cub *cub, int keycode)
 	}
 }
 
-int ft_move(int keycode, t_cub *cub)
+void	movement(int keycode, t_cub *cub)
 {
-	beside_wall(cub, keycode);
 	if (keycode == MOVE_FORWARD)
 		move_player(cub, keycode);
 	if (keycode == MOVE_BACKWARD)
@@ -155,15 +154,21 @@ int ft_move(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
 		release_all(cub, 'f');
+}
+
+int ft_move(int keycode, t_cub *cub)
+{
+	beside_wall(cub, keycode);
+	movement(keycode, cub);
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	if (keycode == CTRL)
 	{
-		draw_mini_map(cub);
+		draw_mini_map(cub, 0);
 		mini_player(cub, cub->p_minix, cub->p_miniy, 3);
 	}
 	else
-		zoomed_map(cub);
+		zoomed_map(cub, 0, 0);
 	put_cursos(cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);

@@ -1,9 +1,7 @@
 #include "../inc/cub.h"
 
-void zoomed_map(t_cub *cub)
+void zoomed_map(t_cub *cub, double x, double y)
 {
-	double x = 0;
-	double y = 0;
 	double start_x;
 	double start_y;
 	start_y = cub->p_y - 200;
@@ -30,33 +28,3 @@ void zoomed_map(t_cub *cub)
 	}
 	mini_player(cub,  200, 200, 10);
 }
-
-/*void draw_mini_map(t_cub *cub)
-{
-	int x;
-	int y;
-	int cofx;
-	int cofy;
-
-	y = 0;
-	while (cub->map_2d[y])
-	{
-		x = 0;
-		cofy = (y * S_SIZE) * SCALE_SIZE;
-		cofx = 0;
-		x = 0;
-		while (cub->map_2d[y][x])
-		{
-			if (x > 0)
-				cofx = (x * S_SIZE) * SCALE_SIZE;
-			if (cub->map_2d[y][x] == '1')
-				put_square(cub, cofx, cofy, 0x4A4F50);
-			else if (cub->map_2d[y][x] == 'D')
-				put_square(cub, cofx, cofy, 0xFEDF32);
-			else
-				put_square(cub, cofx, cofy, 0x669A9E);
-			x += 1;
-		}
-		y += 1;
-	}
-}*/

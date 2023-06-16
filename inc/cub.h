@@ -37,7 +37,7 @@ int		ft_move(int keycode, t_cub *cub);
 void	my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 void    init_values(t_cub *cub);
 int 	ft_move(int keycode, t_cub *cub);
-void 	draw_mini_map(t_cub *cub);
+void 	draw_mini_map(t_cub *cub, int y);
 int     check_wall(t_cub *cub, int x, int y);
 void    intersections(double rayangle, t_cub *cub);
 void	cast_all_rays(t_cub *cub);
@@ -52,7 +52,7 @@ void	player_minimap(t_cub *cub, int x, int y);
 void    put_square(t_cub *cub, int x, int y, int color);
 void	put_cursos(t_cub *cub);
 void	check_walls2(char **s, t_cub *cub);
-void	zoomed_map(t_cub *cub);
+void zoomed_map(t_cub *cub, double x, double y);
 void	mini_player(t_cub *cub, int x, int y, int size);
 int	    create_trgb(int r, int g, int b);
 #endif

@@ -28,7 +28,7 @@ void    mouse_rotate(t_cub *cub)
     }
     put_surfaces(cub);
     cast_all_rays(cub);
-	// draw_mini_map(cub);
+	zoomed_map(cub, 0, 0);
 	put_cursos(cub);
     mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 }
@@ -107,14 +107,12 @@ void put_square(t_cub *cub, int x, int y, int color)
 	}
 }
 
-void draw_mini_map(t_cub *cub)
+void draw_mini_map(t_cub *cub, int y)
 {
 	int x;
-	int y;
 	int cofx;
 	int cofy;
 
-	y = 0;
 	while (cub->map_2d[y])
 	{
 		x = 0;
@@ -149,7 +147,7 @@ void put_player(t_cub *cub)
 	cub->p_miniy = cub->p_y * SCALE_SIZE;
 	set_textures(cub);
 	cast_all_rays(cub);
-	zoomed_map(cub);
+	zoomed_map(cub, 0, 0);
 	put_cursos(cub);
 }
 
