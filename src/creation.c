@@ -157,6 +157,38 @@ int	ft_close(t_cub *cub)
 	return (0);
 }
 
+int	gun_animation(t_cub *cub)
+{
+	static int i;
+	if (cub->gun_key)
+	{
+		if (i >= 0 && i < 2)
+			cub->n_of_img = 0;
+		else if (i >= 2 && i < 4)
+			cub->n_of_img = 1;
+		else if (i >= 4 && i < 6)
+			cub->n_of_img = 2;
+		else if (i >= 6 && i < 8)
+			cub->n_of_img = 3;
+		else if (i >= 8 && i < 10)
+			cub->n_of_img = 4;
+		else if (i >= 10 && i < 12)
+			cub->n_of_img = 5;
+		else if (i >= 12 && i < 14)
+			cub->n_of_img = 6;
+		else if (i == 14)
+		{
+			i = 0;
+			cub->n_of_img = 0;
+			draw(cub);
+			cub->gun_key = 0;
+		}
+		draw(cub);
+		i++;
+	}
+	return (0);
+}
+
 void creation(t_cub *cub)
 {
 	init_values(cub);
@@ -169,6 +201,8 @@ void creation(t_cub *cub)
 	mlx_hook(cub->w_ptr, 02, (1L<<0), ft_move, cub);
 	mlx_hook(cub->w_ptr, 6, 0,  &mouse, cub);
 	mlx_hook(cub->w_ptr, 17, 0, ft_close, cub);
+	mlx_loop_hook(cub->m_ptr, gun_animation, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
 	mlx_loop(cub->m_ptr);
 }

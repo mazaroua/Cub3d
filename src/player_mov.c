@@ -138,6 +138,15 @@ void	increment_angle(t_cub *cub, int keycode)
 	}
 }
 
+void	draw(t_cub *cub)
+{
+	put_surfaces(cub);
+	cast_all_rays(cub);
+	put_cursos(cub);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
+}
+
 void	movement(int keycode, t_cub *cub)
 {
 	if (keycode == MOVE_FORWARD)
@@ -154,14 +163,15 @@ void	movement(int keycode, t_cub *cub)
 		increment_angle(cub, keycode);
 	if (keycode == ESC)
 		release_all(cub, 'f');
+	draw(cub);
+	if (keycode == 12)
+		cub->gun_key = 1;
 }
 
 int ft_move(int keycode, t_cub *cub)
 {
 	beside_wall(cub, keycode);
 	movement(keycode, cub);
-	put_surfaces(cub);
-	cast_all_rays(cub);
 	if (keycode == CTRL)
 	{
 		draw_mini_map(cub, 0);
@@ -169,7 +179,5 @@ int ft_move(int keycode, t_cub *cub)
 	}
 	else
 		zoomed_map(cub, 0, 0);
-	put_cursos(cub);
-	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	return (0);
 }

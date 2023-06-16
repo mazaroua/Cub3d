@@ -55,4 +55,6 @@ void	check_walls2(char **s, t_cub *cub);
 void zoomed_map(t_cub *cub, double x, double y);
 void	mini_player(t_cub *cub, int x, int y, int size);
 int	    create_trgb(int r, int g, int b);
+void	draw(t_cub *cub);
+
 #endif

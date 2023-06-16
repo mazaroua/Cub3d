@@ -32,10 +32,19 @@ void    init_values(t_cub *cub)
 		cub->y_map += 1;
 	}
 	cub->x_map = tmp;
-	printf("x = %d\n", cub->x_map);
-	printf("y = %d\n", cub->y_map);
     cub->win_width = cub->x_map * S_SIZE;
     cub->win_height = cub->y_map * S_SIZE;
     get_angle(cub);
     cub->m_ptr = mlx_init();
+	//
+	cub->n_of_img = 0;
+	cub->gun_key = 0;
+	cub->gun_sprite = malloc(sizeof(void *) * 7);
+	cub->gun_sprite[0] = mlx_xpm_file_to_image(cub->m_ptr, "textures/1.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[1] = mlx_xpm_file_to_image(cub->m_ptr, "textures/2.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[2] = mlx_xpm_file_to_image(cub->m_ptr, "textures/3.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[3] = mlx_xpm_file_to_image(cub->m_ptr, "textures/4.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[4] = mlx_xpm_file_to_image(cub->m_ptr, "textures/5.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[5] = mlx_xpm_file_to_image(cub->m_ptr, "textures/6.xpm", &cub->w, &cub->h);
+	cub->gun_sprite[6] = mlx_xpm_file_to_image(cub->m_ptr, "textures/7.xpm", &cub->w, &cub->h);
 }

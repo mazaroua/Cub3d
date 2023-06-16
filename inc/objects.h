@@ -139,6 +139,11 @@ typedef struct s_cub
 	int     ROT_TO_RIGHT;
     int     ROT_TO_LEFT;
 	double	x_offset;
+	void	**gun_sprite;
+	int		n_of_img;
+	int		gun_key;
+	int		w;
+	int		h;
 }	t_cub;
 
 #endif
