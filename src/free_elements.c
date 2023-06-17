@@ -51,6 +51,7 @@ void	release_all(t_cub *cub, char f)
 		free(cub->north_txt);
 		free(cub->west_txt);
 		free(cub->east_txt);
+		free(cub->gun_sprite);
 	}
 	free(cub);
 	exit (0);

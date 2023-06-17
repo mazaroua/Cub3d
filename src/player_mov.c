@@ -82,16 +82,18 @@ bool	check_sides(t_cub *cub, int xtmp, int ytmp)
 
 	right_angle = set_angle(cub->angle - M_PI / 2);
 	intersections(right_angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 4)
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
 	{
+		printf("right side intersection\n");
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 		return (true);
 	}
 	left_angle = set_angle(cub->angle + M_PI / 2);
 	intersections(left_angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 4)
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
 	{
+		printf("left side intersection\n");
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 		return (true);
@@ -109,6 +111,13 @@ void move_player(t_cub *cub, int keycode)
 	player_newpos(cub, keycode);
 	if (check_sides(cub, xtmp, ytmp) == true)
 		return;
+	intersections(cub->angle, cub);
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
+	{
+		cub->p_x = xtmp;
+		cub->p_y = ytmp;
+		return ;
+	}
 	if (check_wall(cub, cub->p_x, cub->p_y) == 1
 		|| check_wall(cub, cub->p_x, cub->p_y) == 2)
 	{
@@ -168,8 +177,6 @@ void	draw(t_cub *cub)
 {
 	put_surfaces(cub);
 	cast_all_rays(cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) == 0.2)
-		return ;
 	put_cursos(cub);
 	if (cub->all_map)
 	{
@@ -179,7 +186,8 @@ void	draw(t_cub *cub)
 	else
 		zoomed_map(cub, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
-	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img],\
+	(WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
 }
 
 void	movement(int keycode, t_cub *cub)

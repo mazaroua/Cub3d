@@ -83,7 +83,7 @@ char	**mlx_int_str_to_wordtab(char *str)
     while (*(str+pos) && *(str+pos)!=' ' && *(str+pos)!='\t')
       pos ++;
   }
-  if (!(tab = malloc((1+nb_word)*sizeof(*tab))))
+  if (!(tab = malloc((1 + nb_word)*sizeof(*tab))))
     return ((char **)0);
   nb_word = 0;
   pos = 0;

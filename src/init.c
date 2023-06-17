@@ -39,7 +39,7 @@ void    init_values(t_cub *cub)
 	//
 	cub->n_of_img = 0;
 	cub->gun_key = 0;
-	cub->gun_sprite = malloc(sizeof(void *) * 7);
+	cub->gun_sprite = ft_malloc(sizeof(void *) * 7);
 	cub->gun_sprite[0] = mlx_xpm_file_to_image(cub->m_ptr, "textures/1.xpm", &cub->w, &cub->h);
 	cub->gun_sprite[1] = mlx_xpm_file_to_image(cub->m_ptr, "textures/2.xpm", &cub->w, &cub->h);
 	cub->gun_sprite[2] = mlx_xpm_file_to_image(cub->m_ptr, "textures/3.xpm", &cub->w, &cub->h);
