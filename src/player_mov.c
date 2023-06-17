@@ -75,14 +75,40 @@ void	player_newpos(t_cub *cub, int key)
 	}
 }
 
+bool	check_sides(t_cub *cub, int xtmp, int ytmp)
+{
+	double	right_angle;
+	double	left_angle;
+
+	right_angle = set_angle(cub->angle - M_PI / 2);
+	intersections(right_angle, cub);
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 4)
+	{
+		cub->p_x = xtmp;
+		cub->p_y = ytmp;
+		return (true);
+	}
+	left_angle = set_angle(cub->angle + M_PI / 2);
+	intersections(left_angle, cub);
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 4)
+	{
+		cub->p_x = xtmp;
+		cub->p_y = ytmp;
+		return (true);
+	}
+	return (false);
+}
+
 void move_player(t_cub *cub, int keycode)
 {
-	int	xtmp;
-	int	ytmp;
+	int		xtmp;
+	int		ytmp;
 
 	xtmp = cub->p_x;
 	ytmp = cub->p_y;
 	player_newpos(cub, keycode);
+	if (check_sides(cub, xtmp, ytmp) == true)
+		return;
 	if (check_wall(cub, cub->p_x, cub->p_y) == 1
 		|| check_wall(cub, cub->p_x, cub->p_y) == 2)
 	{
@@ -142,6 +168,8 @@ void	draw(t_cub *cub)
 {
 	put_surfaces(cub);
 	cast_all_rays(cub);
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x, cub->next_y) == 0.2)
+		return ;
 	put_cursos(cub);
 	if (cub->all_map)
 	{

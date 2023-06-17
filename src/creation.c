@@ -246,6 +246,7 @@ void creation(t_cub *cub)
 	mlx_mouse_hook(cub->w_ptr, gun_key, cub);
 	mlx_loop_hook(cub->m_ptr, keys, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
-	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
+	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0],\
+	(WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
 	mlx_loop(cub->m_ptr);
 }
