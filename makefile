@@ -13,20 +13,24 @@ SRS= src/castrays.c       src/ft_split.c             src/player_mov.c \
 	src/ft_split2.c      src/new_texture.c
 
 OJS= $(SRS:.c=.o)
+MLX = minilibx/libmlx.a
 
 all: $(NAME)
 
-$(NAME): $(OJS)
-	cc $(CFLAGS) -o $(NAME) $(OJS) $(LINK)
+$(NAME): $(MLX) $(OJS)
+	cc $(CFLAGS) -o $(NAME) $(MLX) $(OJS) $(LINK)
 
 %.o:src/%.c $(INC)
 	cc -c $(CFLAGS) $< -o $@
+$(MLX):
+	@make -C ./minilibx
 
 clean:
-	rm -rf $(OJS)
+	@rm -rf $(OJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@make clean -C ./minilibx
+	@rm -rf $(NAME)
 
 re : fclean all
 .PHONY : clean re all fclean

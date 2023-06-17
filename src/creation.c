@@ -4,69 +4,55 @@ void    mouse_rotate(t_cub *cub)
 {
     if (cub->ROT_TO_RIGHT)
     {
+		printf("right: %f\n", cub->angle * (180 / M_PI));
         if (cub->angle >= 355 * (M_PI / 180))
         {
                 cub->angle = 0;
                 return ;
         }
         cub->angle = cub->angle * (180 / M_PI);
-        cub->angle += 2;
+        cub->angle += 5;
         cub->angle = cub->angle * (M_PI / 180);
 
     }
     else if (cub->ROT_TO_LEFT)
     {
+		printf("left: %f\n", cub->angle * (180 / M_PI));
         if (cub->angle <= 0)
         {
+			printf("Negative: %f\n", cub->angle * (180 / M_PI));
             cub->angle = 355 * (M_PI / 180);
             return ;
         }
         cub->angle = cub->angle * (180 / M_PI);
-    	cub->angle -= 2;
+    	cub->angle -= 5;
         cub->angle = cub->angle * (M_PI / 180);
 
     }
-    put_surfaces(cub);
-    cast_all_rays(cub);
-	zoomed_map(cub, 0, 0);
-	put_cursos(cub);
-    mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
+    draw(cub);
 }
 
 int    mouse(int x, int y, t_cub *cub)
 {
+	mlx_mouse_hide();
     (void)y;
-    cub->ROT_TO_RIGHT = 0;
+	cub->ROT_TO_RIGHT = 0;
     cub->ROT_TO_LEFT = 0;
-    static int    last_x;
-
+	if (x == WIN_WITH / 2)
+		return (0);
     if (x > WIN_WITH / 2)
     {
-        if (x < last_x)
-        {
-            cub->ROT_TO_LEFT = 1;
-            last_x = x;
-        }
-        else if (x > last_x)
-        {
-            last_x = x;
-            cub->ROT_TO_RIGHT = 1;
-        }
+		cub->ROT_TO_RIGHT = 1;
+		mlx_mouse_move(cub->w_ptr, WIN_WITH / 2, WIN_HEIGTH / 2);
     }
     else if (x < WIN_WITH / 2)
     {
-        if (x > last_x)
-        {
-            cub->ROT_TO_RIGHT = 1;
-            last_x = x;
-        }
-        else if (x < last_x)
-        {
-            last_x = x;
-            cub->ROT_TO_LEFT = 1;
-        }
+		cub->ROT_TO_LEFT = 1;
+		mlx_mouse_move(cub->w_ptr, WIN_WITH / 2, WIN_HEIGTH / 2);
     }
     mouse_rotate(cub);
+    cub->ROT_TO_RIGHT = 0;
+    cub->ROT_TO_LEFT = 0;
     return (0);
 }
 
@@ -160,48 +146,105 @@ int	ft_close(t_cub *cub)
 int	gun_animation(t_cub *cub)
 {
 	static int i;
-	if (cub->gun_key)
+
+	if (i >= 0 && i < 1)
+		cub->n_of_img = 0;
+	else if (i >= 1 && i < 2)
+		cub->n_of_img = 1;
+	else if (i >= 2 && i < 3)
+		cub->n_of_img = 2;
+	else if (i >= 3 && i < 4)
+		cub->n_of_img = 3;
+	else if (i >= 4 && i < 5)
+		cub->n_of_img = 4;
+	else if (i >= 5 && i < 6)
+		cub->n_of_img = 5;
+	else if (i >= 6 && i < 7)
+		cub->n_of_img = 6;
+	else if (i == 7)
 	{
-		if (i >= 0 && i < 2)
-			cub->n_of_img = 0;
-		else if (i >= 2 && i < 4)
-			cub->n_of_img = 1;
-		else if (i >= 4 && i < 6)
-			cub->n_of_img = 2;
-		else if (i >= 6 && i < 8)
-			cub->n_of_img = 3;
-		else if (i >= 8 && i < 10)
-			cub->n_of_img = 4;
-		else if (i >= 10 && i < 12)
-			cub->n_of_img = 5;
-		else if (i >= 12 && i < 14)
-			cub->n_of_img = 6;
-		else if (i == 14)
-		{
-			i = 0;
-			cub->n_of_img = 0;
-			draw(cub);
-			cub->gun_key = 0;
-		}
-		draw(cub);
-		i++;
+		i = 0;
+		cub->gun_key = 0;
+	}
+	draw(cub);
+	i++;
+	return (0);
+}
+
+int	gun_key(int key, int x, int y, t_cub *cub)
+{
+	(void)x, (void)y;
+	if (key == 1)
+	{
+		cub->gun_key = 1;
 	}
 	return (0);
+}
+
+int	key_up(int keycode, t_cub *cub)
+{
+	if (keycode == MOVE_FORWARD)
+		cub->move_forward = 0;
+	if (keycode == MOVE_BACKWARD)
+		cub->move_backward = 0;
+	if (keycode == MOVE_LEFT)
+		cub->move_left = 0;
+	if (keycode == MOVE_RIGHT)
+		cub->move_right = 0;
+	if (keycode == RIGHT_ROTATION)
+		cub->rotation_right = 0;
+	if (keycode == LEFT_ROTATION)
+		cub->rotation_left = 0;
+	return (0);
+}
+
+int	keys(t_cub *cub)
+{
+	if (cub->move_forward == 1)
+		move_player(cub, MOVE_FORWARD);
+	if (cub->move_backward == 1)
+		move_player(cub, MOVE_BACKWARD);
+	if (cub->move_right == 1)
+		move_player(cub, MOVE_RIGHT);
+	if (cub->move_left == 1)
+		move_player(cub, MOVE_LEFT);
+	if (cub->rotation_right == 1)
+		increment_angle(cub, RIGHT_ROTATION);
+	if (cub->rotation_left == 1)
+		increment_angle(cub, LEFT_ROTATION);
+	if (cub->gun_key == 1)
+		gun_animation(cub);
+	draw(cub);
+	return (0);
+}
+
+void	init_keys(t_cub *cub)
+{
+	cub->move_backward = 0;
+	cub->move_forward = 0;
+	cub->move_right = 0;
+	cub->move_left = 0;
+	cub->rotation_right = 0;
+	cub->rotation_left = 0;
+	cub->gun_key = 0;
 }
 
 void creation(t_cub *cub)
 {
 	init_values(cub);
+	init_keys(cub);
 	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WITH, WIN_HEIGTH, "cub3d");
 	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WITH, WIN_HEIGTH);
 	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
 	, &cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);
 	put_player(cub);
-	mlx_hook(cub->w_ptr, 02, (1L<<0), ft_move, cub);
+	mlx_hook(cub->w_ptr, 2, 0, ft_move, cub);
+	mlx_hook(cub->w_ptr, 3, 0, key_up, cub);
 	mlx_hook(cub->w_ptr, 6, 0,  &mouse, cub);
 	mlx_hook(cub->w_ptr, 17, 0, ft_close, cub);
-	mlx_loop_hook(cub->m_ptr, gun_animation, cub);
+	mlx_mouse_hook(cub->w_ptr, gun_key, cub);
+	mlx_loop_hook(cub->m_ptr, keys, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
 	mlx_loop(cub->m_ptr);

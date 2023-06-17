@@ -144,6 +144,14 @@ typedef struct s_cub
 	int		gun_key;
 	int		w;
 	int		h;
+	//
+	int		move_forward;
+	int		move_backward;
+	int		move_right;
+	int		move_left;
+	int		rotation_right;
+	int		rotation_left;
+	int		gun;
 }	t_cub;
 
 #endif

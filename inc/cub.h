@@ -7,7 +7,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <math.h>
-# include <mlx.h>
+// # include <mlx.h>
+# include "../minilibx/mlx.h"
 # include <fcntl.h>
 # include "get_next_line.h"
 # include "objects.h"
@@ -56,5 +57,7 @@ void zoomed_map(t_cub *cub, double x, double y);
 void	mini_player(t_cub *cub, int x, int y, int size);
 int	    create_trgb(int r, int g, int b);
 void	draw(t_cub *cub);
+void move_player(t_cub *cub, int keycode);
+void	increment_angle(t_cub *cub, int keycode);
 
 #endif

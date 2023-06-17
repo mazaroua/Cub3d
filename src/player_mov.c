@@ -47,29 +47,29 @@ void	player_newpos(t_cub *cub, int key)
 {
 	if (key == MOVE_FORWARD)
 	{
-		cub->p_x += 5 * cos(cub->angle);
-		cub->p_y += 5 * sin(cub->angle);
+		cub->p_x += 3 * cos(cub->angle);
+		cub->p_y += 3 * sin(cub->angle);
 		cub->p_minix = cub->p_x * SCALE_SIZE;
 		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_BACKWARD)
 	{
-		cub->p_x -= 5 * cos(cub->angle);
-		cub->p_y -= 5 * sin(cub->angle);
+		cub->p_x -= 3 * cos(cub->angle);
+		cub->p_y -= 3 * sin(cub->angle);
 		cub->p_minix = cub->p_x * SCALE_SIZE;
 		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_LEFT)
 	{
-		cub->p_x += 5 * sin(cub->angle);
-		cub->p_y -= 5 * cos(cub->angle);
+		cub->p_x += 3 * sin(cub->angle);
+		cub->p_y -= 3 * cos(cub->angle);
 		cub->p_minix = cub->p_x * SCALE_SIZE;
 		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
 	if (key == MOVE_RIGHT)
 	{
-		cub->p_x -= 5 * sin(cub->angle);
-		cub->p_y += 5 * cos(cub->angle);
+		cub->p_x -= 3 * sin(cub->angle);
+		cub->p_y += 3 * cos(cub->angle);
 		cub->p_minix = cub->p_x * SCALE_SIZE;
 		cub->p_miniy = cub->p_y * SCALE_SIZE;
 	}
@@ -150,22 +150,19 @@ void	draw(t_cub *cub)
 void	movement(int keycode, t_cub *cub)
 {
 	if (keycode == MOVE_FORWARD)
-		move_player(cub, keycode);
+		cub->move_forward = 1;
 	if (keycode == MOVE_BACKWARD)
-		move_player(cub, keycode);
+		cub->move_backward = 1;
 	if (keycode == MOVE_LEFT)
-		move_player(cub, keycode);
+		cub->move_left = 1;
 	if (keycode == MOVE_RIGHT)
-		move_player(cub, keycode);
+		cub->move_right = 1;
 	if (keycode == RIGHT_ROTATION)
-		increment_angle(cub, keycode);
+		cub->rotation_right = 1;
 	if (keycode == LEFT_ROTATION)
-		increment_angle(cub, keycode);
+		cub->rotation_left = 1;
 	if (keycode == ESC)
 		release_all(cub, 'f');
-	draw(cub);
-	if (keycode == 12)
-		cub->gun_key = 1;
 }
 
 int ft_move(int keycode, t_cub *cub)
