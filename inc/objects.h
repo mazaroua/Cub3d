@@ -152,6 +152,7 @@ typedef struct s_cub
 	int		rotation_right;
 	int		rotation_left;
 	int		gun;
+	int		all_map;
 }	t_cub;
 
 #endif

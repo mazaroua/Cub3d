@@ -143,12 +143,20 @@ void	draw(t_cub *cub)
 	put_surfaces(cub);
 	cast_all_rays(cub);
 	put_cursos(cub);
+	if (cub->all_map)
+	{
+		draw_mini_map(cub, 0);
+		mini_player(cub, cub->p_minix, cub->p_miniy, 3);
+	}
+	else
+		zoomed_map(cub, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img], (WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
 }
 
 void	movement(int keycode, t_cub *cub)
 {
+	cub->all_map = 0;
 	if (keycode == MOVE_FORWARD)
 		cub->move_forward = 1;
 	if (keycode == MOVE_BACKWARD)
@@ -163,18 +171,21 @@ void	movement(int keycode, t_cub *cub)
 		cub->rotation_left = 1;
 	if (keycode == ESC)
 		release_all(cub, 'f');
+	if (keycode == CTRL)
+		cub->all_map = 1;
 }
 
 int ft_move(int keycode, t_cub *cub)
 {
 	beside_wall(cub, keycode);
 	movement(keycode, cub);
-	if (keycode == CTRL)
-	{
-		draw_mini_map(cub, 0);
-		mini_player(cub, cub->p_minix, cub->p_miniy, 3);
-	}
-	else
-		zoomed_map(cub, 0, 0);
+	// if (keycode == CTRL)
+	// {
+
+	// 	draw_mini_map(cub, 0);
+	// 	mini_player(cub, cub->p_minix, cub->p_miniy, 3);
+	// }
+	// else
+	// 	zoomed_map(cub, 0, 0);
 	return (0);
 }
