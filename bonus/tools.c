@@ -1,5 +1,18 @@
 #include "../inc/cub.h"
 
+char	*ft_strdup(char *s)
+{
+	char	*new;
+	int		i;
+
+	new = ft_malloc(ft_strlen(s) + 1);
+	i = -1;
+	while (s[++i])
+		new[i] = s[i];
+	new[i] = 0;
+	return (new);
+}
+
 void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 {
 	char	*dst;

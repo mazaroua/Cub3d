@@ -59,5 +59,5 @@ int	    create_trgb(int r, int g, int b);
 void	draw(t_cub *cub);
 void move_player(t_cub *cub, int keycode);
 void	increment_angle(t_cub *cub, int keycode);
-
+char	*ft_strdup(char *s);
 #endif

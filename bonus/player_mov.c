@@ -84,7 +84,6 @@ bool	check_sides(t_cub *cub, int xtmp, int ytmp)
 	intersections(right_angle, cub);
 	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
 	{
-		printf("right side intersection\n");
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 		return (true);
@@ -93,7 +92,6 @@ bool	check_sides(t_cub *cub, int xtmp, int ytmp)
 	intersections(left_angle, cub);
 	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
 	{
-		printf("left side intersection\n");
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
 		return (true);
@@ -141,10 +139,8 @@ void	beside_wall(t_cub *cub, int keycode)
 	}
 	if (cub->map_2d[cub->door_row][cub->door_index] == 'x'
 		&& cal_distance(cub->p_x, cub->p_y, cub->door_x, cub->door_y) > 46)
-	{
 		cub->map_2d[cub->door_row][cub->door_index] = 'D';
-		still_open(cub);
-	}
+	still_open(cub);
 }
 
 void	increment_angle(t_cub *cub, int keycode)

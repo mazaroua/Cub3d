@@ -23,9 +23,9 @@ char	*ft_itoa(int n)
 
 	i = digits(n);
 	if (n == 0)
-		return (strdup("0"));
+		return (ft_strdup("0"));
 	if (n == -2147483648)
-		return (strdup("-2147483648"));
+		return (ft_strdup("-2147483648"));
 	num = malloc(digits(n) + 1);
 	if (!(num))
 		return (NULL);

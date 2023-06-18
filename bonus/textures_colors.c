@@ -16,17 +16,17 @@ void	get_textures(t_cub *cub)
 	while (i < 6)
 	{
 		if (!strcmp(cub->element[i][0], "NO"))
-			cub->n_texture = strdup(cub->element[i][1]);
+			cub->n_texture = ft_strdup(cub->element[i][1]);
 		if (!strcmp(cub->element[i][0], "SO"))
-			cub->s_texture = strdup(cub->element[i][1]);
+			cub->s_texture = ft_strdup(cub->element[i][1]);
 		if (!strcmp(cub->element[i][0], "WE"))
-			cub->w_texture = strdup(cub->element[i][1]);
+			cub->w_texture = ft_strdup(cub->element[i][1]);
 		if (!strcmp(cub->element[i][0], "EA"))
-			cub->e_texture = strdup(cub->element[i][1]);
+			cub->e_texture = ft_strdup(cub->element[i][1]);
 		if (!strcmp(cub->element[i][0], "F"))
-			cub->f_color = strdup(cub->element[i][1]);
+			cub->f_color = ft_strdup(cub->element[i][1]);
 		if (!strcmp(cub->element[i][0], "C"))
-			cub->c_color = strdup(cub->element[i][1]);
+			cub->c_color = ft_strdup(cub->element[i][1]);
 		i++;
 	}
 	get_colors(cub);
