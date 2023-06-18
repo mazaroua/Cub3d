@@ -2,17 +2,17 @@
 
 char first_elements(char *str)
 {
-	if (!strcmp("NO", str))
+	if (!ft_strcmp("NO", str))
         return ('N');
-    if (!strcmp("SO", str))
+    if (!ft_strcmp("SO", str))
         return ('S');
-    if (!strcmp("WE", str))
+    if (!ft_strcmp("WE", str))
         return ('W');
-    if (!strcmp("EA", str))
+    if (!ft_strcmp("EA", str))
         return ('E');
-	if (!strcmp("F", str))
+	if (!ft_strcmp("F", str))
         return ('F');
-    if (!strcmp("C", str))
+    if (!ft_strcmp("C", str))
 		return ('C');
 	return (0);
 }

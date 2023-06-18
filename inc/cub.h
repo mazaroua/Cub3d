@@ -60,4 +60,5 @@ void	draw(t_cub *cub);
 void move_player(t_cub *cub, int keycode);
 void	increment_angle(t_cub *cub, int keycode);
 char	*ft_strdup(char *s);
+int	    ft_strcmp(char *s1, char *s2);
 #endif

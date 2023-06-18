@@ -46,7 +46,6 @@ void	catch_door(t_cub *cub)
 	}
 }
 
-
 void DDA(t_cub *cub)
 {	
 	t_ray	ray;
