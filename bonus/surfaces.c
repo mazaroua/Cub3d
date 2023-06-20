@@ -16,7 +16,7 @@ int	put_sky(t_cub *cub)
 	while (y < (WIN_HEIGTH / 2))
 	{
 		x = 0;
-		while (x < WIN_WITH)
+		while (x < WIN_WIDTH)
 		{
 			my_mlx_pixel_put(cub, x, y , color);
 			x += 1;
@@ -35,7 +35,7 @@ void	put_surfaces(t_cub *cub)
 	while (y < WIN_HEIGTH)
 	{
 		x = 0;
-		while (x < WIN_WITH)
+		while (x < WIN_WIDTH)
 		{
 			my_mlx_pixel_put(cub, x, y , color);
 			x += 1;

@@ -1,9 +1,9 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
 
-# define WIN_WITH	1024
+# define WIN_WIDTH	1024
 # define WIN_HEIGTH 800
-# define NUM_RAYS	WIN_WITH
+# define NUM_RAYS	WIN_WIDTH
 # define S_SIZE		32
 # define FOV_AGL  (60 * (M_PI / 180))
 # define MEM_ERR "memory allocation error\n"
@@ -144,7 +144,6 @@ typedef struct s_cub
 	int		gun_key;
 	int		w;
 	int		h;
-	//
 	int		move_forward;
 	int		move_backward;
 	int		move_right;
@@ -152,7 +151,7 @@ typedef struct s_cub
 	int		rotation_right;
 	int		rotation_left;
 	int		gun;
-	int		all_map;
+	bool	all_map;
 }	t_cub;
 
 #endif

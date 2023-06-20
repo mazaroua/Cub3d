@@ -86,7 +86,7 @@ void move_player(t_cub *cub, int keycode)
 	if (check_sides(cub, xtmp, ytmp) == true)
 		return;
 	intersections(cub->angle, cub);
-	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 2)
+	if (cal_distance(cub->p_x, cub->p_y, cub->next_x , cub->next_y) < 6)
 	{
 		cub->p_x = xtmp;
 		cub->p_y = ytmp;
@@ -133,7 +133,7 @@ void	draw(t_cub *cub)
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 }
 
-void	movement(int keycode, t_cub *cub)
+int ft_move(int keycode, t_cub *cub)
 {
 	if (keycode == MOVE_FORWARD)
 		cub->move_forward = 1;
@@ -149,18 +149,5 @@ void	movement(int keycode, t_cub *cub)
 		cub->rotation_left = 1;
 	if (keycode == ESC)
 		release_all(cub, 'f');
-}
-
-int ft_move(int keycode, t_cub *cub)
-{
-	movement(keycode, cub);
-	// if (keycode == CTRL)
-	// {
-
-	// 	draw_mini_map(cub, 0);
-	// 	mini_player(cub, cub->p_minix, cub->p_miniy, 3);
-	// }
-	// else
-	// 	zoomed_map(cub, 0, 0);
 	return (0);
 }

@@ -44,7 +44,10 @@ void	duplicated(char *elements, t_cub *cub)
 		while (elements[j])
 		{
 			if (elements[j] == elements[i])
-				exit_error(cub);
+			{
+				free(elements);
+				exit_error(cub, 2);
+			}
 			j += 1;
 		}
 		i += 1;
@@ -63,7 +66,10 @@ void    check_elements(char ***map, t_cub *cub)
     while (i < 6)
     {
         if (first_elements(map[i][0]) == 0 || size_map(map[i]) != 2)
-            exit_error(cub);
+		{
+			free(elements);
+			exit_error(cub, 2);
+		}
         else
 			elements[i] = first_elements(map[i][0]);
 		i += 1;

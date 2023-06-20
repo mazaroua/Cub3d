@@ -183,7 +183,7 @@ void	draw(t_cub *cub)
 		zoomed_map(cub, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[cub->n_of_img],\
-	(WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
+	(WIN_WIDTH / 2) - (166 / 2), WIN_HEIGTH - 122);
 }
 
 void	movement(int keycode, t_cub *cub)
@@ -202,7 +202,7 @@ void	movement(int keycode, t_cub *cub)
 	if (keycode == LEFT_ROTATION)
 		cub->rotation_left = 1;
 	if (keycode == ESC)
-		release_all(cub, 'f');
+		exit(0);
 	if (keycode == CTRL)
 		cub->all_map = 1;
 }

@@ -38,17 +38,17 @@ int    mouse(int x, int y, t_cub *cub)
     (void)y;
 	cub->ROT_TO_RIGHT = 0;
     cub->ROT_TO_LEFT = 0;
-	if (x == WIN_WITH / 2)
+	if (x == WIN_WIDTH / 2)
 		return (0);
-    if (x > WIN_WITH / 2)
+    if (x > WIN_WIDTH / 2)
     {
 		cub->ROT_TO_RIGHT = 1;
-		mlx_mouse_move(cub->w_ptr, WIN_WITH / 2, WIN_HEIGTH / 2);
+		mlx_mouse_move(cub->w_ptr, WIN_WIDTH / 2, WIN_HEIGTH / 2);
     }
-    else if (x < WIN_WITH / 2)
+    else if (x < WIN_WIDTH / 2)
     {
 		cub->ROT_TO_LEFT = 1;
-		mlx_mouse_move(cub->w_ptr, WIN_WITH / 2, WIN_HEIGTH / 2);
+		mlx_mouse_move(cub->w_ptr, WIN_WIDTH / 2, WIN_HEIGTH / 2);
     }
     mouse_rotate(cub);
     cub->ROT_TO_RIGHT = 0;
@@ -139,7 +139,7 @@ void put_player(t_cub *cub)
 
 int	ft_close(t_cub *cub)
 {
-	release_all(cub, 'f');
+	exit(0);
 	return (0);
 }
 
@@ -233,8 +233,8 @@ void creation(t_cub *cub)
 {
 	init_values(cub);
 	init_keys(cub);
-	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WITH, WIN_HEIGTH, "cub3d");
-	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WITH, WIN_HEIGTH);
+	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH, "cub3d");
+	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH);
 	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
 	, &cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);
@@ -247,6 +247,6 @@ void creation(t_cub *cub)
 	mlx_loop_hook(cub->m_ptr, keys, cub);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->data->img, 0, 0);
 	mlx_put_image_to_window(cub->m_ptr, cub->w_ptr, cub->gun_sprite[0],\
-	(WIN_WITH / 2) - (166 / 2), WIN_HEIGTH - 122);
+	(WIN_WIDTH / 2) - (166 / 2), WIN_HEIGTH - 122);
 	mlx_loop(cub->m_ptr);
 }

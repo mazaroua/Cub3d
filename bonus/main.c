@@ -15,7 +15,10 @@ char	*get_map(int fd)
 		if (!line)
 			break ;
 		if (i > 6 && line[0] == '\n')
-			exit_error(0);
+		{
+			free(line);
+			exit_error(0, 0);
+		}
 		if (line[0] != '\n')
 		{
 			i += 1;
@@ -25,7 +28,10 @@ char	*get_map(int fd)
 			free(line);
 	}
 	if (i < 6)
-		exit_error(0);
+	{
+		free(r_map);
+		exit_error(0, 0);
+	}
 	return (r_map);
 }
 
@@ -61,12 +67,13 @@ void	pars_cub(t_cub *cub, char *arg)
 	cub->fd_m = open(arg, O_RDONLY);
 	if (cub->fd_m == -1)
 	{
+		write(2, "Error\n", 6);
 		free(cub);
-		exit_error(0);
+		exit (EXIT_FAILURE);
 	}
 	cub->map_1d = get_map(cub->fd_m);
 	if (cub->map_1d[0] == 0)
-		exit_error(cub);
+		exit_error(cub, 1);
 	cub->all = ft_split(cub->map_1d, '\n');
 	cub->element = get_elements(cub->all);
 	cub->map_2d = cub->all + 6;
@@ -84,9 +91,10 @@ int	main(int ac, char **av)
 	t_cub	*cub;
 
 	if (ac != 2)
-		exit_error(0);
+		exit_error(0, 0);
 	if (v_extension(av[1]))
-		exit_error(0);
+		exit_error(0, 0);
+	atexit(f);
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
 	check_walls2(cub->map_2d, cub);

@@ -84,8 +84,8 @@ void creation(t_cub *cub)
 {
 	init_values(cub);
 	init_keys(cub);
-	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WITH, WIN_HEIGTH, "cub3d");
-	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WITH, WIN_HEIGTH);
+	cub->w_ptr = mlx_new_window(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH, "cub3d");
+	cub->data->img = mlx_new_image(cub->m_ptr, WIN_WIDTH, WIN_HEIGTH);
 	cub->data->addr = mlx_get_data_addr(cub->data->img, &cub->data->bits_per_pixel \
 	, &cub->data->line_length, &cub->data->endian);
 	put_surfaces(cub);

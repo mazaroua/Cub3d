@@ -10,8 +10,8 @@ void	horiz_cursor(t_cub * cub)
 	ep = 0;
 	while (ep < 3)
 	{
-		i = (WIN_WITH / 2) - 15;
-		while (i < (WIN_WITH / 2) + 15)
+		i = (WIN_WIDTH / 2) - 15;
+		while (i < (WIN_WIDTH / 2) + 15)
 		{
 			my_mlx_pixel_put(cub, i, j + ep, 0xFEDF32);
 			i += 1;
@@ -27,7 +27,7 @@ void	put_cursos(t_cub *cub)
 	int	ep;
 	horiz_cursor(cub);
 	j = (WIN_HEIGTH / 2) - 15;
-	i = WIN_WITH / 2;
+	i = WIN_WIDTH / 2;
 	while (j < (WIN_HEIGTH / 2) + 15)
 	{
 		ep = 0;
@@ -74,11 +74,9 @@ void	check_texture(t_cub *cub)
 	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, &t->width, &t->height);
 	texture_failure(t);
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->s_texture, &t->width, &t->height);
+	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, &t->width, &t->height);
 	texture_failure(t);
 	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->e_texture, &t->width, &t->height);
-	texture_failure(t);
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, "textures/door.xpm", &t->width, &t->height);
 	texture_failure(t);
 	free(t);
 }
@@ -90,5 +88,4 @@ void	set_textures(t_cub *cub)
 	cub->south_txt = new_texture(cub, cub->s_texture);
 	cub->west_txt = new_texture(cub, cub->w_texture);
 	cub->east_txt = new_texture(cub, cub->e_texture);
-	cub->door_txt = new_texture(cub, "textures/door.xpm");
 }

@@ -14,27 +14,35 @@ void	*ft_malloc(int size)
 	return (ptr);
 }
 
-void    exit_error(t_cub *cub)
+void    exit_error(t_cub *cub, char step)
 {
     write(2, "Error\n", 6);
-	if (cub)
+	if (step == 0)
+		exit (EXIT_FAILURE);
+	if (step > 1)
+		free_2d(cub->all);
+	free_3d(cub->element);
+	if (step >= 3)
 	{
-		if (cub->map_1d[0] == 0)
-		{
-			free(cub->map_1d);
-			free(cub);
-		}
-		else
-       		release_all(cub, 'x');
+		free(cub->c_color);
+		free(cub->f_color);
+		free(cub->rgb_c);
+		free(cub->rgb_f);
+		free(cub->n_texture);
+		free(cub->s_texture);
+		free(cub->e_texture);
+		free(cub->w_texture);
 	}
-    exit (EXIT_FAILURE);
+	free(cub->map_1d);
+	free(cub);
+	exit (EXIT_FAILURE);
 }
 
 void	release_all(t_cub *cub, char f)
 {
 	free(cub->map_1d);
-	free_3d(cub->element);
 	free_2d(cub->all);
+	free_3d(cub->element);
 	free(cub->e_texture);
 	free(cub->n_texture);
 	free(cub->w_texture);
@@ -43,15 +51,14 @@ void	release_all(t_cub *cub, char f)
 	free(cub->c_color);
 	free(cub->rgb_c);
 	free(cub->rgb_f);
+	free(cub->gun_sprite);
 	free(cub->data);
 	if (f == 'f')
 	{
-		free(cub->door_txt);
 		free(cub->south_txt);
 		free(cub->north_txt);
 		free(cub->west_txt);
 		free(cub->east_txt);
-		free(cub->gun_sprite);
 	}
 	free(cub);
 	exit (0);

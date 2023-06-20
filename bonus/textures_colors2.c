@@ -45,7 +45,7 @@ void	count_comma(char *s, t_cub *cub)
 	int	i;
 
 	if (s[ft_strlen(s) - 1] == ',')
-		exit_error(cub);
+		exit_error(cub, 3);
 	i = 0;
 	f = 0;
 	while (s[i])
@@ -55,12 +55,12 @@ void	count_comma(char *s, t_cub *cub)
 		if (s[i + 1])
 		{
 			if (s[i] == ',' && s[i + 1] == ',')
-				exit_error(cub);
+				exit_error(cub, 3);
 		}
 		i++;
 	}
 	if (f != 2)
-		exit_error(cub);
+		exit_error(cub, 3);
 }
 
 void	valid_colors(t_cub *cub, char *s, char c)
@@ -73,15 +73,24 @@ void	valid_colors(t_cub *cub, char *s, char c)
 	i = 0;
 	sp = ft_split(s, ',');
 	if (size_map(sp) != 3)
-		exit_error(cub);
+	{
+		free_2d(sp);
+		exit_error(cub, 3);
+	}
 	i = 0;
 	while (sp[i])
 	{
 		if (!isnot_dig(sp[i]))
-			exit_error(cub);
+		{
+			free_2d(sp);
+			exit_error(cub, 3);		
+		}
 		code = ft_atoi(sp[i]);
 		if (!(code >= 0 && code <= 255))
-			exit_error(cub);
+		{
+			free_2d(sp);
+			exit_error(cub, 3);
+		}
 		ft_color(cub, code, i, c);
 		i += 1;
 	}

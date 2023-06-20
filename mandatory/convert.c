@@ -70,7 +70,7 @@ void	render_walls(double rayangle, t_cub *cub, int i)
 	* cos(newang);
 	if (round(raydistance) == 0)
 		raydistance = 1;
-	plan_dist = (WIN_WITH / 2) / tan(FOV_AGL / 2);
+	plan_dist = (WIN_WIDTH / 2) / tan(FOV_AGL / 2);
 	proj_plan_h = (S_SIZE  / raydistance) * plan_dist;
 	put_rect(rayangle, i, cub, proj_plan_h);
 }

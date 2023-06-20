@@ -25,7 +25,7 @@ void	release_all(t_cub *cub, char f);
 int		size_map(char **str);
 void    check_elements(char ***map, t_cub *cub);
 int		whitespaces(char c);
-void    exit_error(t_cub *cub);
+void    exit_error(t_cub *cub, char step);
 void	check_map(char **map, t_cub *cub, int i);
 char	*ft_itoa(int n);
 int		ft_atoi(char *str);

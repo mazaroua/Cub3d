@@ -12,8 +12,8 @@ char	poss_char(char c)
 		return (WEST);
 	if(c == 'E')
 		return (EAST);
-	if (c == 'D')
-		return (DOR);
+	if(c == 'D')
+		return ('D');
 	return (0);
 }
 
@@ -24,16 +24,16 @@ void	check_map(char **map, t_cub *cub, int i)
 
 	pos = false;
 	if (!*map)
-		exit_error(cub);
+		exit_error(cub, 3);
 	while (map[++i])
 	{
 		j = (-1);
 		while (map[i][++j])
 		{
 			if (poss_char(map[i][j]) == 0)
-				exit_error(cub);
+				exit_error(cub, 3);
 			if (pos == true && poss_char(map[i][j]) != 1 && poss_char(map[i][j]) != 68)
-				exit_error(cub);
+				exit_error(cub, 3);
 			if (poss_char(map[i][j]) != 1 && poss_char(map[i][j]) != 68)
 			{
 				cub->p_or = poss_char(map[i][j]);
@@ -44,6 +44,7 @@ void	check_map(char **map, t_cub *cub, int i)
 		}
 	}	
 }
+
 int check_sp(char **s,int i ,int j)
 {
 	if( s[i][j] == ' ')
@@ -75,21 +76,21 @@ void	check_walls2(char **s, t_cub *cub)
 		j = 0;
 		while(s[i][j++] == ' ');
 		if (s[i][j - 1] != '1')
-				exit_error(cub);
+			exit_error(cub, 3);
 		j = 0;
 		while (s[i][j])
 		{
 			if(i == 0 && s[i][j] != ' ' && s[i][j] != '1')
-				exit_error(cub);
+				exit_error(cub, 3);
 			if(check_sp(s, i , j) == -1)
-				exit_error(cub);
+				exit_error(cub, 0);
 			if(!s[i + 1]  && s[i][j] != ' ' && s[i][j] != '1')
-				exit_error(cub);
+				exit_error(cub, 3);
 			j++;
 		}
 		while(s[i][--j] == ' ');
 		if (s[i][j] != '1')
-				exit_error(cub);
+				exit_error(cub, 3);
 		i++;
 	}
 }

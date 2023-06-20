@@ -37,14 +37,14 @@ void    init_values(t_cub *cub)
     get_angle(cub);
     cub->m_ptr = mlx_init();
 	//
-	cub->n_of_img = 0;
-	cub->gun_key = 0;
-	cub->gun_sprite = ft_malloc(sizeof(void *) * 7);
-	cub->gun_sprite[0] = mlx_xpm_file_to_image(cub->m_ptr, "textures/1.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[1] = mlx_xpm_file_to_image(cub->m_ptr, "textures/2.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[2] = mlx_xpm_file_to_image(cub->m_ptr, "textures/3.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[3] = mlx_xpm_file_to_image(cub->m_ptr, "textures/4.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[4] = mlx_xpm_file_to_image(cub->m_ptr, "textures/5.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[5] = mlx_xpm_file_to_image(cub->m_ptr, "textures/6.xpm", &cub->w, &cub->h);
-	cub->gun_sprite[6] = mlx_xpm_file_to_image(cub->m_ptr, "textures/7.xpm", &cub->w, &cub->h);
+	// cub->n_of_img = 0;
+	// cub->gun_key = 0;
+	// cub->gun_sprite = ft_malloc(sizeof(void *) * 7);
+	// cub->gun_sprite[0] = mlx_xpm_file_to_image(cub->m_ptr, "textures/1.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[1] = mlx_xpm_file_to_image(cub->m_ptr, "textures/2.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[2] = mlx_xpm_file_to_image(cub->m_ptr, "textures/3.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[3] = mlx_xpm_file_to_image(cub->m_ptr, "textures/4.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[4] = mlx_xpm_file_to_image(cub->m_ptr, "textures/5.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[5] = mlx_xpm_file_to_image(cub->m_ptr, "textures/6.xpm", &cub->w, &cub->h);
+	// cub->gun_sprite[6] = mlx_xpm_file_to_image(cub->m_ptr, "textures/7.xpm", &cub->w, &cub->h);
 }
