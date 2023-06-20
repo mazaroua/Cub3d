@@ -62,4 +62,10 @@ void	increment_angle(t_cub *cub, int keycode);
 char	*ft_strdup(char *s);
 int	    ft_strcmp(char *s1, char *s2);
 char	*get_map(int fd, int i);
+void	horizontal_intersection(double rayangle, t_cub *cub);
+void	vertical_intersection(double rayangle, t_cub *cub);
+int	is_wall(t_cub *cub, double x, double y);
+bool	right_side(double rayangle);
+int	player_up(double angle);
+
 #endif

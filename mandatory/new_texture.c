@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_texture.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mazaroua <mazaroua@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/21 00:34:14 by mazaroua          #+#    #+#             */
+/*   Updated: 2023/06/21 00:35:59 by mazaroua         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
-void	horiz_cursor(t_cub * cub)
+void	horiz_cursor(t_cub *cub)
 {
 	int	i;
 	int	j;
@@ -25,6 +37,7 @@ void	put_cursos(t_cub *cub)
 	int	i;
 	int	j;
 	int	ep;
+
 	horiz_cursor(cub);
 	j = (WIN_HEIGTH / 2) - 15;
 	i = WIN_WIDTH / 2;
@@ -40,7 +53,7 @@ void	put_cursos(t_cub *cub)
 	}
 }
 
-t_tx   *new_texture(t_cub *cub, char *file)
+t_tx	*new_texture(t_cub *cub, char *file)
 {
 	t_tx	*tx;
 
@@ -49,7 +62,7 @@ t_tx   *new_texture(t_cub *cub, char *file)
 	if (!tx->ptr)
 		return (0);
 	tx->data = (unsigned int *)mlx_get_data_addr(tx->ptr, &tx->bpp \
-	,&tx->size_line, &tx->endian);
+	, &tx->size_line, &tx->endian);
 	if (!tx->data)
 		return (0);
 	return (tx);
@@ -70,13 +83,17 @@ void	check_texture(t_cub *cub)
 	t_tx	*t;
 
 	t = ft_malloc(sizeof(t_tx));
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->n_texture, &t->width, &t->height);
+	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->n_texture, \
+	&t->width, &t->height);
 	texture_failure(t);
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, &t->width, &t->height);
+	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, \
+	&t->width, &t->height);
 	texture_failure(t);
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, &t->width, &t->height);
+	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->w_texture, \
+	&t->width, &t->height);
 	texture_failure(t);
-	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->e_texture, &t->width, &t->height);
+	t->ptr = mlx_xpm_file_to_image(cub->m_ptr, cub->e_texture, \
+	&t->width, &t->height);
 	texture_failure(t);
 	free(t);
 }

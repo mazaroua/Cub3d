@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_elements.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mazaroua <mazaroua@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/20 21:37:40 by mazaroua          #+#    #+#             */
+/*   Updated: 2023/06/20 21:38:57 by mazaroua         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub.h"
 
 void	*ft_malloc(int size)
 {
-    void	*ptr;
+	void	*ptr;
 
 	ptr = malloc(size);
 	if (!ptr)
@@ -14,9 +25,9 @@ void	*ft_malloc(int size)
 	return (ptr);
 }
 
-void    exit_error(t_cub *cub, char step)
+void	exit_error(t_cub *cub, char step)
 {
-    write(2, "Error\n", 6);
+	write(2, "Error\n", 6);
 	if (step == 0)
 		exit (EXIT_FAILURE);
 	if (step > 1)
@@ -67,8 +78,8 @@ void	free_3d(char ***s)
 {
 	int	i;
 
-    if (!**s)
-        return ;
+	if (!**s)
+		return ;
 	i = 0;
 	while (s[i])
 		i++;
@@ -83,8 +94,8 @@ void	free_2d(char **str)
 {
 	int	i;
 
-    if (!*str)
-        return ;
+	if (!*str)
+		return ;
 	i = 0;
 	while (str[i])
 		i += 1;
