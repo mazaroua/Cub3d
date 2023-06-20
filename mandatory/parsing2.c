@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures_colors.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/20 17:12:10 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/20 17:12:13 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 void	get_colors(t_cub *cub)
@@ -56,24 +68,25 @@ void	duplicated(char *elements, t_cub *cub)
 	get_textures(cub);
 }
 
-void    check_elements(char ***map, t_cub *cub)
+void	check_elements(char ***map, t_cub *cub)
 {
-    int 	i;
-    char    *elements;
+	int		i;
+	char	*elements;
 
-    i = 0;
+	i = 0;
 	elements = ft_malloc(7);
-    while (i < 6)
-    {
-        if (first_elements(map[i][0]) == 0 || size_map(map[i]) != 2)
+	while (i < 6)
+	{
+		if (first_elements(map[i][0]) == 0
+			|| size_map(map[i]) != 2)
 		{
 			free(elements);
 			exit_error(cub, 2);
 		}
-        else
+		else
 			elements[i] = first_elements(map[i][0]);
 		i += 1;
-    }
+	}
 	elements[i] = 0;
 	duplicated(elements, cub);
 }

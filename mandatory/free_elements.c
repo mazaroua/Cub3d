@@ -60,7 +60,7 @@ void	release_all(t_cub *cub, char f)
 		free(cub->east_txt);
 	}
 	free(cub);
-	exit (0);
+	exit (EXIT_SUCCESS);
 }
 
 void	free_3d(char ***s)

@@ -18,7 +18,7 @@ int	put_sky(t_cub *cub)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			my_mlx_pixel_put(cub, x, y , color);
+			my_mlx_pixel_put(cub, x, y, color);
 			x += 1;
 		}
 		y += 1;
@@ -28,16 +28,18 @@ int	put_sky(t_cub *cub)
 
 void	put_surfaces(t_cub *cub)
 {
-	int x;
+	int	x;
 	int	color;
-	int y = put_sky(cub);
+	int	y;
+
+	y = put_sky(cub);
 	color = create_trgb(cub->rgb_f->r, cub->rgb_f->g, cub->rgb_f->b);
 	while (y < WIN_HEIGTH)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			my_mlx_pixel_put(cub, x, y , color);
+			my_mlx_pixel_put(cub, x, y, color);
 			x += 1;
 		}
 		y += 1;

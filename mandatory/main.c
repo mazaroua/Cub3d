@@ -1,39 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-har <isel-har@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/20 17:07:54 by isel-har          #+#    #+#             */
+/*   Updated: 2023/06/20 17:07:55 by isel-har         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
-
-char	*get_map(int fd)
-{
-	char	*r_map;
-	char	*line;
-	int		i;
-
-	r_map = ft_malloc(1);
-	*r_map = 0;
-	i = 0;
-	while (true)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (i > 6 && line[0] == '\n')
-		{
-			free(line);
-			exit_error(0, 0);
-		}
-		if (line[0] != '\n')
-		{
-			i += 1;
-			r_map = ft_strjoin2(r_map, line);
-		}
-		else
-			free(line);
-	}
-	if (i < 6)
-	{
-		free(r_map);
-		exit_error(0, 0);
-	}
-	return (r_map);
-}
 
 char	***get_elements(char **map)
 {
@@ -71,7 +48,7 @@ void	pars_cub(t_cub *cub, char *arg)
 		free(cub);
 		exit (EXIT_FAILURE);
 	}
-	cub->map_1d = get_map(cub->fd_m);
+	cub->map_1d = get_map(cub->fd_m, 0);
 	if (cub->map_1d[0] == 0)
 		exit_error(cub, 1);
 	cub->all = ft_split(cub->map_1d, '\n');
@@ -79,11 +56,6 @@ void	pars_cub(t_cub *cub, char *arg)
 	cub->map_2d = cub->all + 6;
 	check_elements(cub->element, cub);
 	check_map(cub->map_2d, cub, -1);
-}
-
-void	f()
-{
-	system("leaks cub3d");
 }
 
 int	main(int ac, char **av)
@@ -94,10 +66,9 @@ int	main(int ac, char **av)
 		exit_error(0, 0);
 	if (v_extension(av[1]))
 		exit_error(0, 0);
-	atexit(f);
 	cub = ft_malloc(sizeof(t_cub));
 	pars_cub(cub, av[1]);
 	check_walls2(cub->map_2d, cub);
 	creation(cub);
-	release_all(cub, 'x');
+	return (0);
 }

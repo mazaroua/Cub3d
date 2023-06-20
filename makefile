@@ -6,14 +6,14 @@ MLX = minilibx/libmlx.a
 GNL= gnl/get_next_line.c  gnl/get_next_line_utils.c
 #------------------------files---------------------------------------------
 SRS=mandatory/castrays.c            mandatory/init.c \
-	mandatory/check_map.c           mandatory/intersections.c \
+	mandatory/parsing4.c           mandatory/intersections.c \
 	mandatory/convert.c             mandatory/main.c \
 	mandatory/creation.c            mandatory/new_texture.c \
 	mandatory/free_elements.c       mandatory/player_mov.c \
 	mandatory/ft_itoa.c             mandatory/surfaces.c \
-	mandatory/ft_split.c            mandatory/textures_colors.c \
-	mandatory/ft_split2.c           mandatory/textures_colors2.c \
-    mandatory/tools.c 				$(GNL)
+	mandatory/ft_split.c            mandatory/parsing2.c \
+	mandatory/ft_split2.c           mandatory/parsing3.c \
+    mandatory/tools.c 				mandatory/parsing1.c $(GNL)
 	
 OJS= $(SRS:.c=.o)
 #----------------------bonus part----------------------------------------
