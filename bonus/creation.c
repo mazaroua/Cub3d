@@ -137,7 +137,7 @@ void put_player(t_cub *cub)
 	put_cursos(cub);
 }
 
-int	ft_close(t_cub *cub)
+int	ft_close(void)
 {
 	exit(0);
 	return (0);
